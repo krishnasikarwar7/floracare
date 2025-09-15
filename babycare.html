@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyCare Hub - Modern & Simple - FloraCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* --- Modern BabyCare Theme (Move to style.css for best practice) --- */
+        :root {
+            /* Defined BabyCare Theme Colors */
+            --color-baby-primary: #6EC1E4; /* Light Blue */
+            --color-baby-primary-dark: #4AA8D1;
+            --color-baby-secondary: #FFF9C4; /* Pale Yellow */
+            --color-baby-background: #F4F9FF; /* Very Light Blue/Almost White */
+            --color-baby-text-dark: #01579B; /* Dark Blue */
+            --color-baby-text-medium: #0277BD;
+            --color-baby-text-light: #557185; /* Softer grey-blue */
+            --color-baby-card-bg: #FFFFFF;
+            --color-baby-border: #E0F2FE; /* Lighter blue border */
+            --color-baby-accent-green: #81C784; /* Soft Green for tips/positive */
+            --color-baby-accent-red: #EF9A9A; /* Soft Red for myths/warnings */
+        }
+
+        .babycare-page {
+            background-color: var(--color-baby-background);
+        }
+
+        /* Page Title Section - Simpler */
+        .babycare-page .page-title-section {
+            background: linear-gradient(120deg, var(--color-baby-primary) 0%, #a1d9f0 100%); /* Softer Gradient */
+            padding: calc(var(--spacing-base) * 5) 0; /* Reduced padding */
+            text-align: center;
+            color: #fff; /* White text on gradient */
+            border-bottom: 5px solid var(--color-baby-primary-dark);
+        }
+         .babycare-page .page-title-section h1 {
+            color: #fff;
+            font-weight: 600;
+         }
+         .babycare-page .page-title-section p {
+            color: #fff;
+            opacity: 0.9;
+            font-size: 1.1em;
+            max-width: 650px;
+            margin: var(--spacing-base) auto 0 auto;
+         }
+
+        /* Main Dashboard Section */
+        .babycare-dashboard-section {
+             background-color: transparent; /* Use body background */
+             padding: calc(var(--spacing-base) * 5) 0;
+        }
+         .babycare-dashboard-section h2 {
+             text-align: center;
+             color: var(--color-baby-text-dark);
+             margin-bottom: calc(var(--spacing-base) * 4);
+             font-weight: 600;
+        }
+
+        /* Modern Card Style */
+        .info-card {
+            background-color: var(--color-baby-card-bg);
+            padding: calc(var(--spacing-base) * 3);
+            border-radius: var(--border-radius-medium); /* Use consistent radius */
+            box-shadow: var(--shadow-soft); /* Use soft shadow */
+            border: 1px solid var(--color-baby-border);
+            margin-bottom: calc(var(--spacing-base) * 3);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        .info-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-base) * 1.5;
+            margin-bottom: var(--spacing-base) * 2;
+            padding-bottom: var(--spacing-base) * 1.5;
+            border-bottom: 1px solid var(--color-baby-border);
+        }
+        .info-card .card-icon { /* Updated Icon style */
+            font-size: 1.5em; /* Slightly smaller */
+            color: var(--color-baby-primary);
+            background-color: #eef8ff; /* Very light theme background */
+            border-radius: 8px; /* Rounded square */
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .info-card h3 {
+            margin: 0;
+            font-size: 1.25em;
+            color: var(--color-baby-text-dark);
+            font-weight: 600;
+        }
+        .info-card p {
+            color: var(--color-baby-text-light);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-base) * 2;
+            flex-grow: 1; /* Allow text to take space */
+        }
+        .info-card .card-footer {
+            margin-top: auto; /* Push footer to bottom */
+            text-align: right;
+        }
+        .info-card .btn-link { /* Simple link style */
+            color: var(--color-baby-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        .info-card .btn-link i { margin-left: 5px; }
+        .info-card .btn-link:hover {
+             color: var(--color-baby-primary-dark);
+             text-decoration: underline;
+        }
+        .info-card .status-text { /* For quick status displays */
+            font-size: 0.9em;
+            color: var(--color-baby-text-medium);
+            font-weight: 500;
+            margin-bottom: var(--spacing-base) * 2;
+        }
+
+        /* Grid layout for cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-base) * 3.5);
+        }
+
+        /* Specific Section Styles */
+        .nutrition-section, .myths-section, .concerns-section {
+            padding: calc(var(--spacing-base) * 5) 0;
+        }
+        .nutrition-section h2, .myths-section h2, .concerns-section h2 {
+             text-align: center;
+             color: var(--color-baby-text-dark);
+             margin-bottom: calc(var(--spacing-base) * 4);
+             font-weight: 600;
+        }
+
+        /* Accordion style for tips/myths */
+        .accordion-item {
+            background-color: #fff;
+            margin-bottom: var(--spacing-base);
+            border: 1px solid var(--color-baby-border);
+            border-radius: var(--border-radius-small);
+            overflow: hidden; /* Contain content */
+        }
+        .accordion-header {
+            padding: calc(var(--spacing-base) * 1.5) calc(var(--spacing-base) * 2);
+            background-color: #f8fcff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--color-baby-text-medium);
+        }
+        .accordion-header:hover { background-color: #eef8ff; }
+        .accordion-header i.fa-chevron-down { transition: transform 0.3s ease; }
+        .accordion-header.active i.fa-chevron-down { transform: rotate(180deg); }
+
+        .accordion-content {
+            padding: calc(var(--spacing-base) * 2);
+            border-top: 1px solid var(--color-baby-border);
+            display: none; /* Hidden by default */
+            color: var(--color-baby-text-light);
+            font-size: 0.95em;
+        }
+         .accordion-content p { margin-bottom: var(--spacing-base); line-height: 1.7; }
+         .accordion-content ul { margin-left: calc(var(--spacing-base) * 2.5); padding-left: var(--spacing-base); }
+         .accordion-content li { margin-bottom: var(--spacing-base); }
+
+        .myth-buster .accordion-header { color: var(--color-baby-accent-red); background-color: #fff0f0; }
+        .myth-buster .accordion-header:hover { background-color: #ffe6e6; }
+        .nutrition-tip .accordion-header { color: var(--color-baby-accent-green); background-color: #f0fff0; }
+        .nutrition-tip .accordion-header:hover { background-color: #e6ffe6; }
+
+        /* Ensure container has padding */
+        .container { padding: 0 calc(var(--spacing-base) * 2); } /* Adjust base padding */
+
+        /* --- End Theme Suggestion --- */
+    </style>
+</head>
+<body class="babycare-page">
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-flora">Flora</span><span class="logo-care">Care</span>
+            </a>
+            <nav class="main-nav">
+                 <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html" class="active">BabyCare</a></li>
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li class="mobile-auth" style="display: none;"><a href="login.html">Login</a></li>
+                    <li class="mobile-auth" style="display: none;"><a href="signup.html" class="btn btn-primary mobile-signup-btn">Sign Up</a></li>
+                    <li class="mobile-auth" style="display: none;"><a href="#" class="btn btn-outline btn-logout mobile-logout-btn">Logout</a></li>
+                 </ul>
+            </nav>
+            <div class="header-actions logged-out-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+            <div class="header-actions logged-in-actions" style="display: none;">
+                <span class="user-greeting">Hi!</span>
+                <a href="#" class="btn btn-outline btn-logout">Logout</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                 <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title-section">
+            <div class="container">
+                <h1>BabyCare Hub</h1>
+                <p>Your simple guide to tracking your little one's journey.</p>
+            </div>
+        </section>
+
+        <section class="babycare-dashboard-section">
+            <div class="container">
+                <h2>Quick Overview & Actions</h2>
+                <div class="feature-grid">
+
+                    <article class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-syringe"></i></div>
+                            <h3>Vaccinations</h3>
+                        </div>
+                        <p class="status-text">Next Recommended: DTaP (4 months)</p>
+                        <p>Stay up-to-date with recommended immunization schedules.</p>
+                        <div class="card-footer">
+                             <a href="#" class="btn-link">View Full Schedule <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="card-header">
+                             <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                             <h3>Growth</h3>
+                        </div>
+                        <p class="status-text">Last Logged: 6.5kg (70th %)</p>
+                        <p>Track height, weight, and head circumference progress.</p>
+                        <div class="card-footer">
+                             <a href="#" class="btn-link">Log Growth / View Chart <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-walking"></i></div>
+                            <h3>Milestones</h3>
+                        </div>
+                         <p class="status-text">Latest: Rolled over (4 mo)</p>
+                        <p>Celebrate and record important developmental achievements.</p>
+                        <div class="card-footer">
+                             <a href="#" class="btn-link">Log Milestone / View Timeline <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                     <article class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-edit"></i></div>
+                            <h3>Quick Log</h3>
+                        </div>
+                         <p>Easily log daily events like feeding times, sleep duration, and diaper changes.</p>
+                        <div class="card-footer" style="text-align: center;"> <a href="#" class="btn btn-small btn-outline" style="margin: 5px;">Log Feed</a>
+                             <a href="#" class="btn btn-small btn-outline" style="margin: 5px;">Log Sleep</a>
+                             <a href="#" class="btn btn-small btn-outline" style="margin: 5px;">Log Diaper</a>
+                        </div>
+                    </article>
+
+                </div> </div> </section> <section class="nutrition-section" id="nutrition-tips">
+            <div class="container">
+                <h2><i class="fas fa-utensils"></i> Nutrition Corner</h2>
+                 <div class="accordion-container">
+                     <div class="accordion-item nutrition-tip">
+                         <div class="accordion-header">
+                             <span>0-6 Months: Feeding Basics</span>
+                             <i class="fas fa-chevron-down"></i>
+                         </div>
+                         <div class="accordion-content">
+                             <p>Exclusive breastfeeding is recommended for the first 6 months. Formula is a healthy alternative.</p>
+                             <ul>
+                                 <li>Feed on demand, typically every 2-3 hours for newborns.</li>
+                                 <li>Look for hunger cues like rooting, lip smacking, or putting hands to mouth.</li>
+                                 <li>Ensure baby is latching correctly if breastfeeding.</li>
+                                 <li>Burp baby during and after feedings.</li>
+                             </ul>
+                         </div>
+                     </div>
+                      <div class="accordion-item nutrition-tip">
+                         <div class="accordion-header">
+                             <span>Starting Solids (Around 6 Months)</span>
+                             <i class="fas fa-chevron-down"></i>
+                         </div>
+                         <div class="accordion-content">
+                             <p>Introduce single-ingredient purees when baby shows signs of readiness (good head control, interest in food).</p>
+                             <ul>
+                                <li>Start with iron-rich foods like fortified cereals or pureed meats.</li>
+                                <li>Introduce new foods one at a time, waiting 2-3 days before adding another.</li>
+                                <li>Offer a variety of fruits, vegetables, and grains over time.</li>
+                                 <li>Avoid honey before age 1 and limit added salt or sugar.</li>
+                             </ul>
+                         </div>
+                     </div>
+                      </div>
+            </div>
+        </section>
+
+        <section class="myths-section" id="myth-busters">
+             <div class="container">
+                <h2><i class="fas fa-comment-slash"></i> BabyCare Myth Busters</h2>
+                <div class="accordion-container">
+                     <div class="accordion-item myth-buster">
+                         <div class="accordion-header">
+                             <span>Myth: You can spoil a newborn by holding them too much.</span>
+                             <i class="fas fa-chevron-down"></i>
+                         </div>
+                         <div class="accordion-content">
+                             <p><strong>Fact:</strong> You cannot spoil a young baby with affection. Holding, cuddling, and responding to your baby's needs helps build security and attachment. It's crucial for their emotional development.</p>
+                         </div>
+                     </div>
+                      <div class="accordion-item myth-buster">
+                         <div class="accordion-header">
+                             <span>Myth: Adding cereal to a baby's bottle helps them sleep longer.</span>
+                             <i class="fas fa-chevron-down"></i>
+                         </div>
+                         <div class="accordion-content">
+                             <p><strong>Fact:</strong> This is generally not recommended and can be a choking hazard. It doesn't significantly improve sleep and can lead to overfeeding. Introduce solids with a spoon when developmentally appropriate.</p>
+                         </div>
+                     </div>
+                     <div class="accordion-item myth-buster">
+                         <div class="accordion-header">
+                             <span>Myth: Baby walkers help babies learn to walk faster.</span>
+                             <i class="fas fa-chevron-down"></i>
+                         </div>
+                         <div class="accordion-content">
+                              <p><strong>Fact:</strong> Baby walkers can actually delay walking and pose significant safety risks (falls, access to hazards). Stationary activity centers are a safer alternative if desired.</p>
+                         </div>
+                     </div>
+                     </div>
+             </div>
+        </section>
+
+         <section class="concerns-section" id="common-concerns">
+             <div class="container">
+                 <h2><i class="fas fa-question-circle"></i> Common Concerns & Safety</h2>
+                 <div class="feature-grid">
+                     <article class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background-color: #e3f2fd;"><i class="fas fa-moon"></i></div>
+                            <h3>Sleep Guidance</h3>
+                        </div>
+                        <p>Learn about safe sleep practices (back to sleep!), establishing routines, and typical sleep patterns.</p>
+                        <div class="card-footer">
+                             <a href="#" class="btn-link">Read Sleep Tips <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                     <article class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background-color: #e3f2fd;"><i class="fas fa-car"></i></div>
+                            <h3>Safety First</h3>
+                        </div>
+                        <p>Tips on car seat safety, baby-proofing your home, and preventing common accidents.</p>
+                        <div class="card-footer">
+                             <a href="#" class="btn-link">View Safety Checklist <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                     <article class="info-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background-color: #e3f2fd;"><i class="fas fa-head-side-cough"></i></div>
+                            <h3>Common Illnesses</h3>
+                        </div>
+                        <p>Information on recognizing symptoms of common issues like colds, fever, and when to call the doctor.</p>
+                        <div class="card-footer">
+                             <a href="#" class="btn-link">When to Worry Guide <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                 </div>
+             </div>
+         </section>
+
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-about"> <a href="index.html" class="logo footer-logo"> <span class="logo-flora">Flora</span><span class="logo-care" style="color: white;">Care</span> </a> <p>Simplifying healthcare through technology and compassionate care.</p> </div>
+            <div class="footer-links"> <h4>Explore</h4> <ul> <li><a href="floracare+.html">FloraCare+</a></li> <li><a href="gynecare.html">GyneCare</a></li> <li><a href="babycare.html">BabyCare</a></li> </ul> </div>
+            <div class="footer-links"> <h4>About Us</h4> <ul> <li><a href="aboutus.html">Our Mission</a></li> <li><a href="#">Team</a></li> <li><a href="#">Careers</a></li> <li><a href="#">Blog</a></li> </ul> </div>
+            <div class="footer-links"> <h4>Contact</h4> <ul> <li><a href="#">Help Center</a></li> <li><a href="#">Support</a></li> <li><a href="#">Press</a></li> <li><a href="#">Partnerships</a></li> </ul> </div>
+        </div>
+       <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Basic setup (footer year, menu toggle - handled in script.js)
+
+            // --- Accordion Functionality ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const isActive = header.classList.contains('active');
+
+                    // Optional: Close other accordions in the same container when one opens
+                    // header.closest('.accordion-container').querySelectorAll('.accordion-item').forEach(item => {
+                    //     item.querySelector('.accordion-header').classList.remove('active');
+                    //     item.querySelector('.accordion-content').style.display = 'none';
+                    // });
+
+                    if (!isActive) {
+                        header.classList.add('active');
+                        content.style.display = 'block'; // Or use CSS transitions/animations
+                    } else {
+                         header.classList.remove('active');
+                         content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

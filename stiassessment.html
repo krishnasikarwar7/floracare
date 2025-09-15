@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STI Risk Self-Assessment - FloraCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Optional: Add specific styles for the quiz page */
+        .sti-assessment-page main {
+            padding: calc(var(--spacing-base) * 4) 0;
+            background-color: #fdf6f8; /* Very light pink/white */
+        }
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--color-gyne-card-bg, #fff);
+            padding: calc(var(--spacing-base) * 4);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--color-gyne-border, #FBCFE8);
+        }
+        .quiz-container h1 {
+            text-align: center;
+            color: var(--color-gyne-text-dark, #831843);
+            margin-bottom: var(--spacing-base);
+        }
+        .quiz-intro {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-base) * 4);
+            font-size: 1em;
+            color: var(--color-text-medium);
+        }
+        .quiz-intro strong { /* Emphasize disclaimer */
+            color: var(--color-gyne-primary, #EC4899);
+        }
+        .quiz-question {
+            margin-bottom: calc(var(--spacing-base) * 3.5);
+            padding-bottom: calc(var(--spacing-base) * 2);
+            border-bottom: 1px solid var(--color-gyne-secondary, #FCE7F3);
+        }
+        .quiz-question p { /* Question text */
+            font-weight: 500;
+            margin-bottom: calc(var(--spacing-base) * 1.5);
+            color: var(--color-text-dark);
+        }
+        .quiz-options label {
+            display: block;
+            margin-bottom: var(--spacing-base);
+            padding: calc(var(--spacing-base) * 0.8);
+            background-color: #f9fafb;
+            border-radius: var(--border-radius-small);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: var(--spacing-base);
+            accent-color: var(--color-gyne-primary, #EC4899);
+        }
+         .quiz-options label:has(input[type="radio"]:checked) { /* Style selected option */
+             background-color: var(--color-gyne-secondary, #FCE7F3);
+             border-color: var(--color-gyne-primary, #EC4899);
+         }
+
+        .quiz-submit-btn {
+            display: block;
+            margin: calc(var(--spacing-base) * 3) auto 0 auto;
+            width: auto;
+            padding: calc(var(--spacing-base) * 1.5) calc(var(--spacing-base) * 4);
+        }
+        #quiz-results {
+            margin-top: calc(var(--spacing-base) * 4);
+            padding: calc(var(--spacing-base) * 3);
+            border: 2px solid var(--color-gyne-primary, #EC4899);
+            border-radius: var(--border-radius-medium);
+            background-color: var(--color-gyne-secondary, #FCE7F3);
+            text-align: center;
+        }
+        #quiz-results h3 {
+             color: var(--color-gyne-text-dark, #831843);
+             margin-bottom: var(--spacing-base);
+        }
+         #risk-score { font-weight: bold; font-size: 1.2em;}
+         #risk-interpretation { margin-top: var(--spacing-base); font-weight: 500;}
+         .results-disclaimer { margin-top: calc(var(--spacing-base) * 2); font-size: 0.9em; color: var(--color-text-medium); }
+         .results-disclaimer strong { color: #c2185b;} /* Darker pink for emphasis */
+    </style>
+</head>
+<body class="gynecare-page sti-assessment-page"> <header class="site-header">
+        <div class="container">
+           <a href="index.html" class="logo">
+               <span class="logo-flora">Flora</span><span class="logo-care">Care</span>
+           </a>
+           <nav class="main-nav">
+                <ul>
+                   <li><a href="index.html">Home</a></li>
+                   <li><a href="gynecare.html" class="active">GyneCare</a></li>
+                   <li><a href="aboutus.html">About Us</a></li>
+                   <li class="mobile-auth"><a href="login.html">Login</a></li>
+                   <li class="mobile-auth"><a href="signup.html" class="btn btn-primary mobile-signup-btn">Sign Up</a></li>
+                </ul>
+           </nav>
+           <div class="header-actions">
+               <a href="login.html" class="btn btn-outline">Login</a>
+               <a href="signup.html" class="btn btn-primary">Sign Up</a>
+           </div>
+           <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+           </button>
+       </div>
+   </header>
+
+    <main>
+        <div class="container">
+            <div class="quiz-container">
+                <h1><i class="fas fa-shield-virus"></i> STI Risk Self-Assessment</h1>
+                <p class="quiz-intro">
+                    This brief quiz is for educational purposes only to help you think about factors related to STI risk.
+                    Your answers are confidential and not stored.
+                    <strong>This is NOT a substitute for professional medical advice or testing.</strong>
+                </p>
+
+                <form id="sti-quiz-form">
+
+                    <div class="quiz-question" id="q1">
+                        <p>1. In the past 12 months, have you had vaginal, anal, or oral sex without using a barrier method (like a condom) every time?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1_unprotected_sex" value="yes" data-score="1" required> Yes</label>
+                            <label><input type="radio" name="q1_unprotected_sex" value="no" data-score="0" required> No</label>
+                            <label><input type="radio" name="q1_unprotected_sex" value="na" data-score="0" required> Not sexually active</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question" id="q2">
+                        <p>2. How many sexual partners have you had in the past 12 months?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2_partners" value="0" data-score="0" required> 0</label>
+                            <label><input type="radio" name="q2_partners" value="1" data-score="0" required> 1</label>
+                            <label><input type="radio" name="q2_partners" value="2-4" data-score="1" required> 2-4</label>
+                            <label><input type="radio" name="q2_partners" value="5+" data-score="2" required> 5 or more</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question" id="q3">
+                        <p>3. Do you consistently and correctly use barrier methods (e.g., condoms, dental dams) during sexual activity?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3_barrier" value="always" data-score="0" required> Always</label>
+                            <label><input type="radio" name="q3_barrier" value="sometimes" data-score="1" required> Sometimes</label>
+                            <label><input type="radio" name="q3_barrier" value="rarely_never" data-score="2" required> Rarely / Never</label>
+                            <label><input type="radio" name="q3_barrier" value="na" data-score="0" required> Not applicable / Not sexually active</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question" id="q4">
+                        <p>4. Have you ever been diagnosed with an STI (e.g., chlamydia, gonorrhea, herpes, HPV, HIV)?</p>
+                         <div class="quiz-options">
+                            <label><input type="radio" name="q4_diagnosed" value="yes" data-score="1" required> Yes</label>
+                            <label><input type="radio" name="q4_diagnosed" value="no" data-score="0" required> No</label>
+                             <label><input type="radio" name="q4_diagnosed" value="unsure" data-score="1" required> Unsure</label>
+                        </div>
+                    </div>
+
+                     <div class="quiz-question" id="q5">
+                        <p>5. Has any sexual partner ever told you they had an STI?</p>
+                         <div class="quiz-options">
+                            <label><input type="radio" name="q5_partner_diagnosed" value="yes" data-score="1" required> Yes</label>
+                            <label><input type="radio" name="q5_partner_diagnosed" value="no" data-score="0" required> No</label>
+                            <label><input type="radio" name="q5_partner_diagnosed" value="unsure" data-score="1" required> Unsure</label>
+                            <label><input type="radio" name="q5_partner_diagnosed" value="na" data-score="0" required> Not applicable</label>
+                        </div>
+                    </div>
+
+                     <div class="quiz-question" id="q6">
+                        <p>6. Have you recently experienced any potential STI symptoms (e.g., unusual discharge, sores/bumps, burning urination, genital itching)?</p>
+                         <div class="quiz-options">
+                            <label><input type="radio" name="q6_symptoms" value="yes" data-score="2" required> Yes</label>
+                            <label><input type="radio" name="q6_symptoms" value="no" data-score="0" required> No</label>
+                            <label><input type="radio" name="q6_symptoms" value="unsure" data-score="1" required> Unsure</label>
+                        </div>
+                    </div>
+
+                     <div class="quiz-question" id="q7">
+                        <p>7. How often do you get screened/tested for STIs?</p>
+                         <div class="quiz-options">
+                            <label><input type="radio" name="q7_screening" value="regularly" data-score="0" required> Regularly (e.g., annually or as recommended)</label>
+                            <label><input type="radio" name="q7_screening" value="sometimes" data-score="1" required> Sometimes / Rarely</label>
+                            <label><input type="radio" name="q7_screening" value="never" data-score="1" required> Never / Only when symptomatic</label>
+                            <label><input type="radio" name="q7_screening" value="na" data-score="0" required> Not applicable</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary quiz-submit-btn">Calculate My Risk Score</button>
+                </form>
+
+                <div id="quiz-results" style="display: none;">
+                    <h3>Assessment Result</h3>
+                    <p>Your indicative risk score: <span id="risk-score">0</span></p>
+                    <p id="risk-interpretation">Based on your answers...</p>
+                    <p class="results-disclaimer">
+                        <strong>Important Reminder:</strong> This score is based on common risk factors and is for informational purposes only.
+                        It <strong>does not</strong> replace professional medical advice or diagnostic testing. Many STIs have no symptoms.
+                        Regardless of your score, talk to a healthcare provider about appropriate screening and prevention.
+                    </p>
+                     <a href="book-appointment.html" class="btn btn-outline" style="margin-top: var(--spacing-base);">Book a Consultation</a>
+                </div>
+
+            </div></div></main>
+
+    <footer class="site-footer">
+       <div class="container footer-content">
+            <div class="footer-about"> <a href="index.html" class="logo footer-logo"> <span class="logo-flora">Flora</span><span class="logo-care" style="color: white;">Care</span> </a> <p>Simplifying healthcare through technology and compassionate care.</p> </div> <div class="footer-links"> <h4>Explore</h4> <ul> <li><a href="#">Consultation</a></li> <li><a href="gynecare.html">GyneCare</a></li> </ul> </div> <div class="footer-links"> <h4>About Us</h4> <ul> <li><a href="#">Our Mission</a></li> <li><a href="#">Team</a></li> <li><a href="#">Careers</a></li> <li><a href="#">Blog</a></li> </ul> </div> <div class="footer-links"> <h4>Contact</h4> <ul> <li><a href="#">Help Center</a></li> <li><a href="#">Support</a></li> <li><a href="#">Press</a></li> <li><a href="#">Partnerships</a></li> </ul> </div>
+        </div>
+       <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script> <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Footer year and mobile menu toggle (ensure consistency)
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan && !currentYearSpan.textContent.trim()) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+             if (menuToggle && mainNav) {
+                 menuToggle.addEventListener('click', () => {
+                     menuToggle.classList.toggle('is-active');
+                     mainNav.classList.toggle('is-active');
+                     const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                     menuToggle.setAttribute('aria-expanded', !isExpanded);
+                 });
+             }
+
+            // --- Quiz Functionality ---
+            const quizForm = document.getElementById('sti-quiz-form');
+            const resultsDiv = document.getElementById('quiz-results');
+            const scoreSpan = document.getElementById('risk-score');
+            const interpretationP = document.getElementById('risk-interpretation');
+
+            if (quizForm) {
+                quizForm.addEventListener('submit', (e) => {
+                    e.preventDefault(); // Prevent actual form submission
+
+                    let totalScore = 0;
+                    const questions = quizForm.querySelectorAll('.quiz-question');
+                    let answeredCount = 0;
+
+                    // Loop through question groups or directly through checked radios
+                    questions.forEach(questionDiv => {
+                       const selectedOption = questionDiv.querySelector('input[type="radio"]:checked');
+                       if (selectedOption) {
+                           totalScore += parseInt(selectedOption.dataset.score || 0); // Add score from data attribute
+                           answeredCount++;
+                       }
+                    });
+
+
+                    // --- Basic Score Interpretation (EXAMPLE ONLY - NEEDS MEDICAL VALIDATION) ---
+                    let interpretationText = "";
+                    // Define score thresholds (adjust these based on validated scoring)
+                    const lowRiskMax = 2;
+                    const moderateRiskMax = 5;
+
+                    if (totalScore <= lowRiskMax) {
+                         interpretationText = "Based on your answers, your responses align with factors generally associated with lower STI risk. However, risk is never zero. Regular check-ups and safe practices are always recommended.";
+                    } else if (totalScore <= moderateRiskMax) {
+                         interpretationText = "Based on your answers, some factors indicate a moderate level of STI risk. It's important to discuss prevention, testing, and any concerns with a healthcare provider.";
+                    } else {
+                         interpretationText = "Based on your answers, several factors suggest a potentially higher level of STI risk. It is strongly recommended to speak with a healthcare provider soon about testing, prevention, and addressing any symptoms.";
+                    }
+
+                    // Display results
+                    scoreSpan.textContent = totalScore;
+                    interpretationP.textContent = interpretationText;
+                    resultsDiv.style.display = 'block'; // Show the results section
+
+                    // Optional: Scroll to results
+                    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

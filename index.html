@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloraCare - Your AI-powered Health Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* Optional: Add styling for the hero image if needed in style.css */
+        .hero-actual-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-large); /* Match placeholder style */
+            box-shadow: var(--shadow-medium);
+            object-fit: cover; /* Adjust how image fits container */
+             max-height: 450px; /* Example max height */
+        }
+        .specialty-section .card-highlight .btn-small { /* Style for button inside highlighted card */
+            background-color: white;
+            color: var(--color-primary);
+        }
+        .specialty-section .card-highlight .btn-small:hover {
+            background-color: var(--color-secondary); /* Light blue background */
+            color: var(--color-primary-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-flora">Flora</span><span class="logo-care">Care</span>
+            </a>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html">BabyCare</a></li>
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li class="mobile-auth" style="display: none;"><a href="#" class="btn btn-outline btn-logout mobile-logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions logged-out-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+            <div class="header-actions logged-in-actions" style="display: none;">
+                <span class="user-greeting">Hi!</span>
+                <a href="#" class="btn btn-outline btn-logout">Logout</a>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                 <span></span> <span></span>
+                 <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section" aria-label="Hero Section">
+           <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Your AI-powered Health Companion, Elevated!</h1>
+                    <p>Our platform provides expert insights, virtual consultations, and personalized health tracking. Discover exclusive benefits with FloraCare+ for a proactive approach to your well-being.</p>
+                     <a href="floracare+.html" class="btn btn-primary hero-cta">Explore FloraCare+</a>
+                </div>
+                <div class="hero-image">
+                     <img src="WhatsApp Image 2025-05-02 at 3.57.33 PM.jpeg"
+                          alt="Smiling female doctor in lab coat with stethoscope"
+                          class="hero-actual-image">
+                </div>
+           </div>
+        </section>
+
+        <section class="about-section" aria-label="About Us">
+             <div class="container about-content">
+                 <div class="about-image">
+                    <img src="ChatGPT Image May 2, 2025, 04_18_35 PM.png"
+                    alt="Modern healthcare interface on a tablet"
+                    class="hero-actual-image"> 
+                 </div>
+                 <div class="about-text">
+                     <h2>Empowering Smarter, Simpler Healthcare</h2>
+                     <p>FloraCare is your smart healthcare companion—making wellness simple, accessible, and personalized. From foundational health tracking to premium coaching and advanced testing with FloraCare+, we bring everything you need into one easy-to-use platform.</p>
+                     <p>Take command of your health—smarter, faster, and with confidence.</p>
+                      <a href="aboutus.html" class="btn btn-secondary">Learn More About Us</a>
+                 </div>
+             </div>
+         </section>
+
+        <section class="specialty-section" aria-labelledby="specialty-heading">
+            <div class="container specialty-content">
+                <h2 id="specialty-heading">Our Services</h2>
+                <p class="subtitle">We provide world-class digital health services, from essential care to premium personalized support, delivered by our expert team.</p>
+
+                <div class="specialty-cards">
+                    <div class="card card-highlight"> <div class="card-icon"><i class="fas fa-star"></i></div> <h3>FloraCare+</h3>
+                        <p style="color: var(--color-secondary, #EBF3FF);">Unlock personalized PCOD/PCOS coaching, exclusive home test kits (pee, saliva, blood prick), and curated health bundles.</p>
+                         <a href="floracare+.html" class="btn btn-primary btn-small" style="margin-top: auto;">Discover Premium</a>
+                    </div>
+                    <div class="card">
+                         <div class="card-icon"><i class="fas fa-female"></i></div>
+                        <h3>GyneCare</h3>
+                        <p>Access specialized women's health services, cycle tracking, and expert consultations.</p>
+                         <a href="gynecare.html" class="btn btn-outline btn-small" style="margin-top: auto;">Explore GyneCare</a>
+                    </div>
+                    <div class="card">
+                         <div class="card-icon"><i class="fas fa-baby"></i></div>
+                        <h3>BabyCare</h3>
+                        <p>Track vaccinations, growth, milestones, and access essential baby care resources.</p>
+                         <a href="babycare.html" class="btn btn-outline btn-small" style="margin-top: auto;">Explore BabyCare</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feedback-section" aria-labelledby="feedback-heading">
+            <div class="container">
+                <h2 id="feedback-heading">What Our Users Say</h2>
+                <p class="subtitle">Read feedback about our services and wonderful team.</p>
+
+                <div class="testimonial-cards">
+                    <div class="testimonial-card">
+                        <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
+                        <p class="testimonial-text">"FloraCare+ has been a game-changer for managing my PCOS. The personalized coaching and easy home tests are fantastic!"</p>
+                        <div class="testimonial-author">
+                            <h4>Priya S. (FloraCare+ User)</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                         <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
+                        <p class="testimonial-text">"Finally, a healthcare app that feels modern and is simple to navigate. The GyneCare features are very helpful for tracking."</p>
+                         <div class="testimonial-author">
+                            <h4>Anita L.</h4>
+                             <div class="testimonial-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                         <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
+                        <p class="testimonial-text">"The convenience is unmatched. Managing appointments and getting quick advice through FloraCare has been a game-changer for my busy schedule."</p>
+                         <div class="testimonial-author">
+                            <h4>Rohan M.</h4>
+                             <div class="testimonial-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-about">
+                 <a href="index.html" class="logo footer-logo">
+                    <span class="logo-flora">Flora</span><span class="logo-care" style="color: white;">Care</span>
+                </a>
+                <p>Simplifying healthcare through technology and compassionate care.</p>
+                 </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html">BabyCare</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                 <h4>About Us</h4>
+                 <ul>
+                    <li><a href="aboutus.html">Our Mission</a></li>
+                    <li><a href="aboutus.html#team-heading">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                 <h4>Contact</h4>
+                 <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Partnerships</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+                </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    // This script block can be part of your global script.js
+    // It ensures the correct header actions (login/signup vs logout) are shown.
+    document.addEventListener('DOMContentLoaded', () => {
+        // Footer year update (if not already in script.js)
+        const currentYearSpan = document.getElementById('current-year');
+        if (currentYearSpan && !currentYearSpan.textContent.trim()) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // Menu toggle (if not already in script.js)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('is-active');
+                mainNav.classList.toggle('is-active');
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+
+        // Header actions visibility based on login state
+        // Replace 'false' with your actual login check logic
+        const isLoggedIn = false; // Example: const isLoggedIn = checkUserSession();
+
+        const loggedInActions = document.querySelector('.header-actions.logged-in-actions');
+        const loggedOutActions = document.querySelector('.header-actions.logged-out-actions');
+        const mobileAuthLis = document.querySelectorAll('.main-nav ul li.mobile-auth');
+
+        if (loggedInActions && loggedOutActions && mobileAuthLis.length > 0) {
+            if (isLoggedIn) {
+                loggedInActions.style.display = 'flex';
+                loggedOutActions.style.display = 'none';
+                mobileAuthLis.forEach(li => {
+                    const link = li.querySelector('a');
+                    if (link && link.classList.contains('mobile-logout-btn')) {
+                        li.style.display = 'block'; // Or 'list-item' based on your CSS for li
+                    } else {
+                        li.style.display = 'none';
+                    }
+                });
+            } else {
+                loggedInActions.style.display = 'none';
+                loggedOutActions.style.display = 'flex';
+                mobileAuthLis.forEach(li => {
+                    const link = li.querySelector('a');
+                    if (link && link.classList.contains('mobile-logout-btn')) {
+                        li.style.display = 'none';
+                    } else {
+                        li.style.display = 'block'; // Or 'list-item'
+                    }
+                });
+            }
+        }
+    });
+    </script>
+</body>
+</html>

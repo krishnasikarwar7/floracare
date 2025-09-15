@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - FloraCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Minor style adjustment if .specialty-cards uses a different grid setup than .team-grid */
+        /* Or ensure .team-grid in style.css has:
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // Or your preferred card width
+           gap: calc(var(--spacing-base) * 4);
+        */
+        /* Using .specialty-cards class directly for the grid container for consistency with index.html service cards */
+    </style>
+</head>
+<body class="aboutus-page">
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-flora">Flora</span><span class="logo-care">Care</span>
+            </a>
+            <nav class="main-nav">
+                 <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html">BabyCare</a></li>
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="aboutus.html" class="active">About Us</a></li>
+                    
+                    
+                    <li class="mobile-auth" style="display: none;"><a href="#" class="btn btn-outline btn-logout mobile-logout-btn">Logout</a></li>
+                 </ul>
+            </nav>
+             
+            <div class="header-actions logged-out-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+            <div class="header-actions logged-in-actions" style="display: none;">
+                <span class="user-greeting">Hi!</span>
+                <a href="#" class="btn btn-outline btn-logout">Logout</a>
+            </div>
+           
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                 <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title-section about-title-section">
+            <div class="container">
+                <h1>About FloraCare</h1>
+                <p>Learn more about our mission, values, and the team dedicated to simplifying your healthcare journey.</p>
+            </div>
+        </section>
+
+        <section class="about-mission-section">
+            <div class="container about-content">
+                 <div class="about-text">
+                     <h2>Our Mission & Vision</h2>
+                     <p><strong>Mission:</strong> To make quality healthcare accessible, understandable, and convenient for everyone through innovative technology and compassionate care.</p>
+                     <p><strong>Vision:</strong> To empower individuals to proactively manage their health and well-being, creating a healthier future for all.</p>
+                     <p>We believe that managing your health shouldn't be complicated. FloraCare leverages AI and connects you with expert medical professionals to provide personalized insights and seamless virtual care, right from your fingertips.</p>
+                 </div>
+                 <div class="about-image">
+                      <div class="image-placeholder-about mission-image-placeholder">Mission/Vision Image</div>
+                 </div>
+            </div>
+        </section>
+
+         <section class="our-values-section" aria-labelledby="values-heading">
+            <div class="container">
+                <h2 id="values-heading" style="text-align: center;">Our Core Values</h2>
+                <p class="subtitle">The principles that guide everything we do at FloraCare.</p>
+
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                        <h3>Compassion</h3>
+                        <p>We approach healthcare with empathy, putting patient well-being at the forefront of our services.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                        <h3>Trust & Security</h3>
+                        <p>We prioritize data privacy and build trust through transparency and reliable care.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Innovation</h3>
+                        <p>We continuously explore technology like AI to enhance healthcare accessibility and effectiveness.</p>
+                    </div>
+                     <div class="value-card">
+                        <div class="card-icon"><i class="fas fa-universal-access"></i></div>
+                        <h3>Accessibility</h3>
+                        <p>We strive to break down barriers, making healthcare services convenient and available to all.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section" aria-labelledby="team-heading">
+            <div class="container">
+                <h2 id="team-heading" style="text-align: center;">Meet Our Development Team</h2>
+                <p class="subtitle">The talented individuals building the FloraCare platform.</p>
+
+                <div class="specialty-cards">
+                    <div class="card"> 
+                        <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Krishna Sikarwar</h3>
+                        <p><strong>Frontend Developer</strong><br>Crafting intuitive, responsive user interfaces for a seamless experience.</p>
+                        
+                    </div>
+                     <div class="card"> 
+                        <div class="card-icon"><i class="fas fa-palette"></i></div> 
+                        <h3>Riya Singh</h3>
+                        <p><strong>UI/UX developer</strong><br>Creating Seamless Digital Journeys Through Thoughtful UI/UX Design.</p>
+                    </div>
+                     <div class="card"> 
+                        <div class="card-icon"><i class="fas fa-cogs"></i></div> 
+                        <h3>Vedant Singh</h3>
+                        <p><strong>Backend Developer</strong><br>Ensuring the scalability, security, and reliability of our platform's infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+             <div class="container cta-content">
+                <h2>Ready to Take Control of Your Health?</h2>
+                <p>Join FloraCare today and experience a smarter way to manage your well-being.</p>
+                <a href="signup.html" class="btn btn-primary">Get Started Now</a>
+            </div>
+        </section>
+        
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            
+            <div class="footer-about"> <a href="index.html" class="logo footer-logo"> <span class="logo-flora">Flora</span><span class="logo-care" style="color: white;">Care</span> </a> <p>Simplifying healthcare through technology and compassionate care.</p> </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html">BabyCare</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                 <h4>About Us</h4>
+                 <ul>
+                    <li><a href="aboutus.html">Our Mission</a></li>
+                    <li><a href="#team-heading">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                 </ul>
+            </div>
+            <div class="footer-links">
+                 <h4>Contact</h4>
+                 <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Partnerships</a></li>
+                 </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+     <script>
+        // Basic setup (footer year, menu toggle, header state) - ensure this runs
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan && !currentYearSpan.textContent) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            if (menuToggle && mainNav) {
+                 menuToggle.addEventListener('click', () => {
+                     menuToggle.classList.toggle('is-active');
+                     mainNav.classList.toggle('is-active');
+                     const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                     menuToggle.setAttribute('aria-expanded', !isExpanded);
+                 });
+             }
+
+             // Determine logged-in state (replace with actual logic)
+             // This script should ideally be in your global script.js
+             const isLoggedIn = false; 
+             const loggedInActions = document.querySelector('.header-actions.logged-in-actions');
+             const loggedOutActions = document.querySelector('.header-actions.logged-out-actions');
+             const mobileAuthLis = document.querySelectorAll('.main-nav ul li.mobile-auth');
+
+
+             if(loggedInActions && loggedOutActions) { 
+                 if (isLoggedIn) {
+                    loggedInActions.style.display = 'flex';
+                    loggedOutActions.style.display = 'none';
+                    mobileAuthLis.forEach(li => {
+                        const link = li.querySelector('a');
+                        if (link && link.classList.contains('mobile-logout-btn')) {
+                            li.style.display = 'block';
+                        } else {
+                            li.style.display = 'none';
+                        }
+                    });
+                 } else {
+                    loggedInActions.style.display = 'none';
+                    loggedOutActions.style.display = 'flex';
+                    mobileAuthLis.forEach(li => {
+                        const link = li.querySelector('a');
+                        if (link && link.classList.contains('mobile-logout-btn')) {
+                           li.style.display = 'none';
+                        } else {
+                           li.style.display = 'block';
+                        }
+                    });
+                 }
+             }
+        });
+    </script>
+</body>
+</html>

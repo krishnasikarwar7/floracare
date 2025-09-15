@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Period Tracker - FloraCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Optional: Add specific styles for this page if needed */
+        .period-tracker-page main {
+            padding: calc(var(--spacing-base) * 4) 0;
+            background-color: #fdf6f8; /* Very light pink/white */
+        }
+        .tracker-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--color-gyne-card-bg, #fff);
+            padding: calc(var(--spacing-base) * 4);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--color-gyne-border, #FBCFE8);
+        }
+        .tracker-container h1 {
+            text-align: center;
+            color: var(--color-gyne-text-dark, #831843);
+            margin-bottom: calc(var(--spacing-base) * 4);
+        }
+        .tracker-section {
+            margin-bottom: calc(var(--spacing-base) * 4);
+            padding: calc(var(--spacing-base) * 3);
+            border: 1px solid var(--color-gyne-border, #FBCFE8);
+            border-radius: var(--border-radius-medium);
+            background-color: #fff; /* White background for sections */
+        }
+        .tracker-section h2 {
+            color: var(--color-gyne-primary, #EC4899);
+            margin-bottom: calc(var(--spacing-base) * 3);
+            font-size: 1.5em;
+            border-bottom: 2px solid var(--color-gyne-secondary, #FCE7F3);
+            padding-bottom: var(--spacing-base);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: calc(var(--spacing-base) * 2);
+        }
+        .symptom-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-base);
+        }
+        .symptom-list label {
+            display: block;
+            padding: calc(var(--spacing-base) * 0.5);
+            cursor: pointer;
+        }
+        .symptom-list input[type="checkbox"] {
+            margin-right: var(--spacing-base);
+            accent-color: var(--color-gyne-primary, #EC4899);
+        }
+        .calendar-display-placeholder {
+            min-height: 250px;
+            background-color: #f9fafb;
+            border: 1px dashed var(--color-gyne-border, #FBCFE8);
+            border-radius: var(--border-radius-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-light);
+            font-style: italic;
+            text-align: center;
+            padding: var(--spacing-base);
+        }
+        .cycle-history-log {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--color-gyne-border, #FBCFE8);
+            padding: var(--spacing-base);
+            border-radius: var(--border-radius-small);
+        }
+        .cycle-history-log p { margin-bottom: var(--spacing-base); }
+    </style>
+</head>
+<body class="gynecare-page period-tracker-page"> <header class="site-header">
+         <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-flora">Flora</span><span class="logo-care">Care</span>
+            </a>
+            <nav class="main-nav">
+                 <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gynecare.html" class="active">GyneCare</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li class="mobile-auth"><a href="login.html">Login</a></li>
+                     <li class="mobile-auth"><a href="signup.html" class="btn btn-primary mobile-signup-btn">Sign Up</a></li>
+                 </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                 <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="tracker-container">
+                <h1><i class="fas fa-calendar-alt"></i> Period Tracker & Cycle Log</h1>
+
+                <section class="tracker-section log-period-section">
+                    <h2>Log Your Period</h2>
+                    <form id="log-period-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="period-start-date">Start Date:</label>
+                                <input type="date" id="period-start-date" name="start_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="period-end-date">End Date (Optional):</label>
+                                <input type="date" id="period-end-date" name="end_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="period-flow">Flow (Optional):</label>
+                                <select id="period-flow" name="flow">
+                                    <option value="">Select...</option>
+                                    <option value="light">Light</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="heavy">Heavy</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: var(--spacing-base);">Log Period</button>
+                    </form>
+                </section>
+
+                <section class="tracker-section log-symptoms-section">
+                    <h2>Log Daily Symptoms</h2>
+                    <form id="log-symptoms-form">
+                        <div class="form-group">
+                             <label for="symptom-date">Date:</label>
+                             <input type="date" id="symptom-date" name="symptom_date" required value=""> </div>
+                        <p>Select symptoms experienced on this date:</p>
+                        <ul class="symptom-list">
+                            <li><label><input type="checkbox" name="symptom" value="cramps"> Cramps</label></li>
+                            <li><label><input type="checkbox" name="symptom" value="bloating"> Bloating</label></li>
+                            <li><label><input type="checkbox" name="symptom" value="headache"> Headache</label></li>
+                            <li><label><input type="checkbox" name="symptom" value="fatigue"> Fatigue</label></li>
+                            <li><label><input type="checkbox" name="symptom" value="mood_swings"> Mood Swings</label></li>
+                            <li><label><input type="checkbox" name="symptom" value="acne"> Acne</label></li>
+                            <li><label><input type="checkbox" name="symptom" value="tender_breasts"> Tender Breasts</label></li>
+                            <li><label><input type="checkbox" name="symptom" value="nausea"> Nausea</label></li>
+                            </ul>
+                        <button type="submit" class="btn btn-primary" style="margin-top: var(--spacing-base);">Log Symptoms</button>
+                    </form>
+                </section>
+
+                <section class="tracker-section cycle-view-section">
+                    <h2>Cycle Overview</h2>
+                    <div id="cycle-calendar-placeholder" class="calendar-display-placeholder">
+                        <p>(Cycle calendar visualization will appear here - Requires JavaScript)</p>
+                    </div>
+                </section>
+
+                <section class="tracker-section predictions-history-section">
+                    <h2>Predictions & History</h2>
+                    <div class="form-grid">
+                        <div>
+                            <h4>Predictions</h4>
+                            <p id="next-period-prediction"><strong>Next Predicted Period:</strong> Calculating...</p>
+                            <p id="fertile-window-prediction"><strong>Predicted Fertile Window:</strong> Calculating...</p>
+                            <small>(Predictions improve with more logged cycles)</small>
+                        </div>
+                        <div>
+                            <h4>Cycle History</h4>
+                            <div id="cycle-history-log" class="cycle-history-log">
+                                <p>(Past cycle logs will appear here - Requires JavaScript)</p>
+                                </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div></div></main>
+
+    <footer class="site-footer">
+       <div class="container footer-content">
+            <div class="footer-about">
+                 <a href="index.html" class="logo footer-logo">
+                    <span class="logo-flora">Flora</span><span class="logo-care" style="color: white;">Care</span>
+                </a>
+                <p>Simplifying healthcare through technology and compassionate care.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Consultation</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                 <h4>About Us</h4>
+                 <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+             <div class="footer-links">
+                 <h4>Contact</h4>
+                 <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Partnerships</a></li>
+                </ul>
+            </div>
+        </div>
+       <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script> <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set footer year
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan && !currentYearSpan.textContent.trim()) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Mobile Menu Toggle (ensure it works if not fully handled in script.js)
+             const menuToggle = document.querySelector('.menu-toggle');
+             const mainNav = document.querySelector('.main-nav');
+             if (menuToggle && mainNav) {
+                 menuToggle.addEventListener('click', () => {
+                     menuToggle.classList.toggle('is-active');
+                     mainNav.classList.toggle('is-active');
+                     const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                     menuToggle.setAttribute('aria-expanded', !isExpanded);
+                 });
+             }
+
+             // Set default date for symptom logging to today
+             const symptomDateInput = document.getElementById('symptom-date');
+             if (symptomDateInput) {
+                 const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+                 symptomDateInput.value = today;
+             }
+
+            // --- Period Tracker Functionality (Requires Significant JavaScript) ---
+
+            const logPeriodForm = document.getElementById('log-period-form');
+            const logSymptomsForm = document.getElementById('log-symptoms-form');
+            const cycleHistoryLog = document.getElementById('cycle-history-log');
+            const nextPeriodPredictionEl = document.getElementById('next-period-prediction');
+            const fertileWindowPredictionEl = document.getElementById('fertile-window-prediction');
+            const calendarPlaceholder = document.getElementById('cycle-calendar-placeholder');
+
+            // **Placeholder for loading existing data (e.g., from localStorage or API)**
+            loadTrackerData();
+
+            if (logPeriodForm) {
+                logPeriodForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const startDate = document.getElementById('period-start-date').value;
+                    const endDate = document.getElementById('period-end-date').value;
+                    const flow = document.getElementById('period-flow').value;
+                    console.log('Logging Period:', { startDate, endDate, flow });
+                    // ** Add logic here to save the period data **
+                    savePeriodLog({ startDate, endDate, flow });
+                    updateUI(); // Update history, predictions, calendar
+                    alert('Period logged!'); // Simple feedback
+                });
+            }
+
+            if (logSymptomsForm) {
+                logSymptomsForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const date = document.getElementById('symptom-date').value;
+                    const symptoms = Array.from(logSymptomsForm.querySelectorAll('input[name="symptom"]:checked'))
+                                        .map(cb => cb.value);
+                    console.log('Logging Symptoms for', date, ':', symptoms);
+                    // ** Add logic here to save the symptom data **
+                    saveSymptomLog({ date, symptoms });
+                    updateUI(); // Might update calendar display
+                    alert('Symptoms logged!'); // Simple feedback
+                });
+            }
+
+            function loadTrackerData() {
+                console.log("Loading tracker data (placeholder)...");
+                // ** Implement logic to load saved logs/settings **
+                // Example: const history = JSON.parse(localStorage.getItem('periodHistory')) || [];
+                updateUI();
+            }
+
+            function savePeriodLog(logEntry) {
+                 console.log("Saving period log (placeholder)...", logEntry);
+                 // ** Implement logic to save data (e.g., localStorage or API) **
+                 // Example: let history = JSON.parse(localStorage.getItem('periodHistory')) || [];
+                 // history.push(logEntry);
+                 // localStorage.setItem('periodHistory', JSON.stringify(history));
+            }
+
+             function saveSymptomLog(logEntry) {
+                 console.log("Saving symptom log (placeholder)...", logEntry);
+                 // ** Implement logic to save data **
+            }
+
+
+            function updateUI() {
+                console.log("Updating UI (placeholder)...");
+                // ** Implement logic to: **
+                // 1. Display cycle history in cycleHistoryLog
+                // 2. Calculate and display predictions in prediction elements
+                // 3. Render the cycle calendar in calendarPlaceholder
+                 cycleHistoryLog.innerHTML = "<p>(Past cycle logs need JS to display)</p>";
+                 nextPeriodPredictionEl.textContent = "Next Predicted Period: Needs JS calculation";
+                 fertileWindowPredictionEl.textContent = "Predicted Fertile Window: Needs JS calculation";
+                 calendarPlaceholder.innerHTML = "<p>(Calendar rendering requires JavaScript library or custom code)</p>";
+            }
+
+            // Initial UI update on load
+            updateUI();
+        });
+    </script>
+
+</body>
+</html>

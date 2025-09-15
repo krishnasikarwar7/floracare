@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GyneCare Dashboard & Resources - FloraCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="gynecare-page"> <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-flora">Flora</span><span class="logo-care">Care</span>
+            </a>
+            <nav class="main-nav">
+                 <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gynecare.html" class="active">GyneCare</a></li> 
+                    <li><a href="babycare.html">BabyCare</a></li> 
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li class="mobile-auth"><a href="login.html">Login</a></li> <li class="mobile-auth"><a href="signup.html" class="btn btn-primary mobile-signup-btn">Sign Up</a></li> <li class="mobile-auth" style="display: none;"><a href="#" class="btn btn-outline btn-logout mobile-logout-btn">Logout</a></li> </ul>
+            </nav>
+            <div class="header-actions logged-out-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+             <div class="header-actions logged-in-actions" style="display: none;">
+                <span class="user-greeting">Hi!</span> <a href="#" class="btn btn-outline btn-logout">Logout</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                 <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title-section"> <div class="container">
+                <h1>GyneCare Hub</h1>
+                <p>Your personal space for female health tracking, resources, and routines.</p>
+            </div>
+        </section>
+
+        <section class="gyne-dashboard-section"> <div class="container">
+                <h2>Your Dashboard</h2>
+                <div class="dashboard-grid"> <div class="dashboard-card period-tracker">
+                        <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h3>Period Tracker</h3>
+                        <p>Log your cycle, track symptoms, and predict future periods.</p>
+                        <div class="tracker-ui-placeholder">
+                            <p><strong>Next Predicted Period:</strong> May 15, 2025</p>
+                            <div class="calendar-placeholder"> (Simple Calendar UI Placeholder)</div>
+                        </div>
+                        <a href="periodtracker.html" class="btn btn-primary btn-small">Update Tracker</a>
+                    </div>
+
+                    <div class="dashboard-card sti-assessment">
+                        <div class="card-icon"><i class="fas fa-shield-virus"></i></div>
+                        <h3>STI Self-Assessment</h3>
+                        <p>Take a confidential quiz to assess potential risks. (Educational purposes only)</p>
+                         <a href="stiassessment.html" class="btn btn-primary btn-small">Start Quiz</a>
+                        <small>This quiz does not provide a diagnosis.</small>
+                    </div>
+
+                    <div class="dashboard-card gyne-routine">
+                        <div class="card-icon"><i class="fas fa-notes-medical"></i></div>
+                        <h3>GynoCare Routine</h3>
+                        <p>Recommended check-ups and self-care practices:</p>
+                        <ul>
+                            <li>Annual Well-Woman Exam</li>
+                            <li>Regular Breast Self-Exams</li>
+                            <li>Pap Smear (as recommended)</li>
+                            <li>Maintain Healthy Hygiene</li>
+                        </ul>
+                        <a href="#articles" class="auth-link">Learn More</a> </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles-section" id="articles"> <div class="container">
+                <h2>Health Articles & Resources</h2>
+                <div class="article-grid">
+                    <div class="article-category">
+                        <h3>STI Awareness</h3>
+                        <div class="article-card">
+                            <h4>Understanding STIs</h4>
+                            <p>Learn about common types of Sexually Transmitted Infections...</p>
+                            <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-card">
+                            <h4>Causes & Transmission</h4>
+                            <p>How STIs spread and factors that increase risk...</p>
+                             <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-card">
+                            <h4>Prevention & Precautions</h4>
+                            <p>Effective ways to protect yourself and others...</p>
+                             <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                         <div class="article-card">
+                            <h4>Importance of Testing</h4>
+                            <p>Why regular STI testing is crucial for sexual health...</p>
+                             <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="article-category">
+                        <h3>Female Health Topics</h3>
+                         <div class="article-card">
+                            <h4>Understanding Your Menstrual Cycle</h4>
+                            <p>Phases, hormones, and common variations...</p>
+                             <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-card">
+                            <h4>Breast Health Awareness</h4>
+                            <p>Tips for self-exams and understanding screening...</p>
+                             <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="article-card">
+                            <h4>Pelvic Health Basics</h4>
+                            <p>Common concerns and maintaining pelvic floor health...</p>
+                             <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                         <div class="article-card">
+                            <h4>Nutrition for Women's Health</h4>
+                            <p>Key nutrients and dietary tips for different life stages...</p>
+                             <a href="#" class="auth-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer class="site-footer">
+       <div class="container footer-content">
+            <div class="footer-about"> <a href="index.html" class="logo footer-logo"> <span class="logo-flora">Flora</span><span class="logo-care" style="color: white;">Care</span> </a> <p>Simplifying healthcare through technology and compassionate care.</p> </div>
+            <div class="footer-links"> <h4>Explore</h4> <ul> <li><a href="floracare+.html">FloraCare+</a></li><li><a href="gynecare.html">GyneCare</a></li> <li><a href="babycare.html">BabyCare</a></li> </ul> </div>
+            <div class="footer-links"> <h4>About Us</h4> <ul> <li><a href="aboutus.html">Our Mission</a></li> <li><a href="#">Team</a></li> <li><a href="#">Careers</a></li> <li><a href="#">Blog</a></li> </ul> </div>
+            <div class="footer-links"> <h4>Contact</h4> <ul> <li><a href="#">Help Center</a></li> <li><a href="#">Support</a></li> <li><a href="#">Press</a></li> <li><a href="#">Partnerships</a></li> </ul> </div>
+        </div>
+       <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    </body>
+</html>

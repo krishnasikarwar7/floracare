@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloraCare+ Premium - Personalized Health & Testing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* --- FloraCare+ Specific Styles (Consider moving to style.css) --- */
+        .floracare-plus-page {
+            /* Potential theme colors for premium page if different */
+            --color-premium-primary: #7E57C2; /* Example: Deep Purple */
+            --color-premium-secondary: #EDE7F6; /* Example: Light Purple Accent */
+            --color-premium-dark: #5E35B1;
+        }
+
+        .floracare-plus-page .page-title-section {
+            background: linear-gradient(135deg, var(--color-premium-secondary) 0%, var(--color-premium-primary) 100%);
+            padding: calc(var(--spacing-base) * 6) 0;
+            text-align: center;
+            color: var(--color-text-on-primary);
+        }
+        .floracare-plus-page .page-title-section h1 {
+            color: var(--color-text-on-primary);
+            font-size: clamp(2.5em, 5vw, 3.5em);
+        }
+        .floracare-plus-page .page-title-section p {
+            font-size: 1.15em;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: var(--spacing-base) auto 0 auto;
+        }
+
+        .premium-feature-section {
+            padding: calc(var(--spacing-base) * 8) 0;
+            background-color: var(--color-background-light); /* Or a premium-specific light bg */
+        }
+        .premium-feature-section:nth-child(odd) {
+            background-color: var(--color-background-medium); /* Alternate section backgrounds */
+        }
+        .premium-feature-section h2 {
+            text-align: center;
+            color: var(--color-premium-primary); /* Use premium color for headings */
+            margin-bottom: calc(var(--spacing-base) * 5);
+            font-size: clamp(1.8em, 4vw, 2.5em);
+        }
+        .premium-feature-content {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-base) * 6);
+            margin-bottom: calc(var(--spacing-base) * 4);
+        }
+        .premium-feature-content.reverse {
+            flex-direction: row-reverse;
+        }
+        .premium-feature-text {
+            flex: 1.2;
+        }
+        .premium-feature-text h3 {
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-base) * 1.5;
+            font-size: 1.6em;
+        }
+        .premium-feature-text p {
+            color: var(--color-text-medium);
+            margin-bottom: calc(var(--spacing-base) * 2);
+            line-height: 1.7;
+        }
+        .premium-feature-text ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: calc(var(--spacing-base) * 2);
+        }
+        .premium-feature-text ul li {
+            position: relative;
+            padding-left: calc(var(--spacing-base) * 3);
+            margin-bottom: var(--spacing-base);
+            color: var(--color-text-medium);
+        }
+        .premium-feature-text ul li::before {
+            content: '\f00c'; /* FontAwesome check icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--color-premium-primary);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        .premium-feature-image {
+            flex: 0.8;
+            text-align: center;
+        }
+        .premium-feature-image .image-placeholder { /* Re-use existing or make specific */
+            background-color: var(--color-premium-secondary);
+            border-radius: var(--border-radius-large);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-premium-primary);
+            font-size: 1.2em;
+            box-shadow: var(--shadow-medium);
+        }
+         .premium-feature-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-medium);
+        }
+
+
+        /* Test Kits Section Styling */
+        .test-kits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: calc(var(--spacing-base) * 4);
+        }
+        .kit-card {
+            background-color: var(--color-background-card);
+            padding: calc(var(--spacing-base) * 3);
+            border-radius: var(--border-radius-medium);
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            border: 1px solid var(--border-color-soft);
+            transition: var(--transition-smooth);
+        }
+        .kit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        .kit-card .kit-icon {
+            font-size: 2.5em;
+            color: var(--color-premium-primary);
+            margin-bottom: var(--spacing-base) * 2;
+        }
+        .kit-card h4 {
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-base);
+            font-size: 1.2em;
+        }
+        .kit-card p {
+            font-size: 0.9em;
+            color: var(--color-text-light);
+            margin-bottom: calc(var(--spacing-base) * 2);
+            min-height: 50px; /* For consistent card height */
+        }
+        .kit-card .btn-small {
+            background-color: var(--color-premium-primary);
+            color: var(--color-text-on-primary);
+            border-color: var(--color-premium-primary);
+        }
+         .kit-card .btn-small:hover {
+            background-color: var(--color-premium-dark);
+            border-color: var(--color-premium-dark);
+         }
+
+        /* CTA Section */
+        .premium-cta-section {
+            background-color: var(--color-premium-primary);
+            color: var(--color-text-on-primary);
+            padding: calc(var(--spacing-base) * 7) 0;
+            text-align: center;
+        }
+        .premium-cta-section h2 {
+            color: var(--color-text-on-primary);
+            margin-bottom: var(--spacing-base) * 2;
+        }
+        .premium-cta-section p {
+            font-size: 1.1em;
+            margin-bottom: calc(var(--spacing-base) * 3);
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .premium-cta-section .btn-primary {
+            background-color: var(--color-background-light);
+            color: var(--color-premium-primary);
+            font-size: 1.1em;
+            padding: calc(var(--spacing-base) * 1.5) calc(var(--spacing-base) * 4);
+        }
+         .premium-cta-section .btn-primary:hover {
+            background-color: #f0f0f0; /* Slightly darker white */
+         }
+
+        /* Ensure mobile signup button text is white */
+        .main-nav ul li.mobile-auth a.mobile-signup-btn {
+            color: #FFFFFF; /* Explicitly white. Uses direct value in case var isn't applying */
+        }
+        .main-nav ul li.mobile-auth a.mobile-signup-btn:hover {
+            color: #FFFFFF; /* Keep white on hover as well, if needed */
+        }
+
+    </style>
+</head>
+<body class="floracare-plus-page">
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-flora">Flora</span><span class="logo-care">Care</span><span class="logo-plus" style="color: var(--color-premium-primary, #7E57C2); font-weight: bold;">+</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html">BabyCare</a></li>
+                    <li><a href="floracare+.html" class="active">FloraCare+</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    
+                    <li class="mobile-auth" style="display: none;"><a href="#" class="btn btn-outline btn-logout mobile-logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions logged-out-actions">
+                <a href="login.html" class="btn btn-outline">Login</a> <a href="signup.html" class="btn btn-primary">Sign Up</a> </div>
+            <div class="header-actions logged-in-actions" style="display: none;">
+                <span class="user-greeting">Hi!</span>
+                <a href="#" class="btn btn-outline btn-logout">Logout</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                 <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title-section">
+            <div class="container">
+                <h1>Welcome to FloraCare+</h1>
+                <p>Unlock exclusive access to personalized coaching, advanced home testing, and comprehensive health bundles designed for your unique needs.</p>
+            </div>
+        </section>
+
+        <section class="premium-feature-section">
+            <div class="container">
+                <h2>Personalized PCOD/PCOS Coaching</h2>
+                <div class="premium-feature-content">
+                    <div class="premium-feature-text">
+                        <h3>Your Dedicated Path to Wellness</h3>
+                        <p>Navigate PCOD/PCOS with expert guidance. Our certified coaches provide one-on-one support, creating personalized plans to help you manage symptoms, improve lifestyle, and achieve your health goals.</p>
+                        <ul>
+                            <li>Tailored nutrition and fitness plans.</li>
+                            <li>Regular check-ins and progress tracking.</li>
+                            <li>Stress management techniques.</li>
+                            <li>Holistic approach to symptom management.</li>
+                            <li>Empathetic and confidential consultations.</li>
+                        </ul>
+                        <a href="#cta" class="btn btn-primary" style="background-color: var(--color-premium-primary); border-color:var(--color-premium-primary)">Meet Our Coaches</a>
+                    </div>
+                    <div class="premium-feature-image">
+                        <div class="image-placeholder">Image: Coach & Client Interaction</div>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="premium-feature-section">
+            <div class="container">
+                <h2>FloraCare® Home Test Kits</h2>
+                <div class="premium-feature-content reverse">
+                     <div class="premium-feature-text">
+                        <h3>Convenient & Accurate Testing, Delivered.</h3>
+                        <p>Take control of your health monitoring with our easy-to-use, medically reliable home test kits. Get insights from the comfort of your home.</p>
+                        <p>Our range includes:</p>
+                        <ul>
+                            <li><strong>Fertility & Hormone Panels:</strong> (Saliva, Blood Prick)</li>
+                            <li><strong>Nutritional Deficiency Tests:</strong> (Blood Prick)</li>
+                            <li><strong>Wellness Monitoring Strips:</strong> (Pee Strips for ketones, pH, etc.)</li>
+                            <li><strong>And more specialized tests.</strong></li>
+                        </ul>
+                        <a href="#test-kits-shop" class="btn btn-primary" style="background-color: var(--color-premium-primary); border-color:var(--color-premium-primary)">Browse Test Kits</a>
+                    </div>
+                    <div class="premium-feature-image">
+                        <div class="image-placeholder">Image: FloraCare Test Kit Collection</div>
+                         </div>
+                </div>
+
+                <div class="test-kits-grid" style="margin-top: calc(var(--spacing-base) * 5);" id="test-kits-shop">
+                    <div class="kit-card">
+                        <div class="kit-icon"><i class="fas fa-vial"></i></div>
+                        <h4>Hormone Balance Kit</h4>
+                        <p>Comprehensive saliva test for key female hormones.</p>
+                        <a href="#" class="btn btn-small">Learn More</a>
+                    </div>
+                    <div class="kit-card">
+                        <div class="kit-icon"><i class="fas fa-prescription-bottle-alt"></i></div>
+                        <h4>Vitamin & Mineral Check</h4>
+                        <p>Easy blood prick test for common nutritional deficiencies.</p>
+                        <a href="#" class="btn btn-small">Learn More</a>
+                    </div>
+                    <div class="kit-card">
+                        <div class="kit-icon"><i class="fas fa-tint"></i></div>
+                        <h4>Daily Wellness Strips</h4>
+                        <p>Monitor hydration, pH, and ketones with simple pee strips.</p>
+                        <a href="#" class="btn btn-small">Learn More</a>
+                    </div>
+                     <div class="kit-card">
+                        <div class="kit-icon"><i class="fas fa-box-open"></i></div>
+                        <h4>PCOS Support Bundle</h4>
+                        <p>Includes hormone kit, nutritional test & coaching intro.</p>
+                        <a href="#" class="btn btn-small">View Bundle</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="premium-feature-section">
+            <div class="container">
+                <h2>Curated Test Bundles</h2>
+                <div class="premium-feature-content">
+                    <div class="premium-feature-text">
+                        <h3>Smart Savings, Targeted Insights</h3>
+                        <p>Get more value and a holistic view of your health with our specially curated test bundles. Designed by experts to address specific concerns like PCOD management, fertility planning, or overall wellness.</p>
+                        <ul>
+                            <li><strong>PCOS Management Bundle:</strong> Hormone tests, metabolic markers, and a coaching session.</li>
+                            <li><strong>Fertility Focus Bundle:</strong> Ovulation tests, hormone panels, and partner testing options.</li>
+                            <li><strong>Total Wellness Bundle:</strong> Comprehensive check for vitamins, minerals, and hormonal balance.</li>
+                        </ul>
+                        <a href="#cta" class="btn btn-primary" style="background-color: var(--color-premium-primary); border-color:var(--color-premium-primary)">Explore Bundles</a>
+                    </div>
+                    <div class="premium-feature-image">
+                        <div class="image-placeholder">Image: Test Kit Bundles</div>
+                         </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="premium-cta-section" id="cta">
+            <div class="container">
+                <h2>Ready for a Healthier You with FloraCare+?</h2>
+                <p>Join our premium community today to access personalized care, advanced testing, and take proactive steps towards your well-being.</p>
+                <a href="signup.html?plan=premium" class="btn btn-primary">Upgrade to FloraCare+</a>
+                 <p style="font-size: 0.9em; margin-top: var(--spacing-base) * 2;">Already a member? <a href="login.html" style="color: var(--color-premium-secondary); text-decoration: underline;">Login to explore benefits.</a></p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-about">
+                 <a href="index.html" class="logo footer-logo">
+                    <span class="logo-flora">Flora</span><span class="logo-care" style="color: white;">Care</span><span class="logo-plus" style="color: var(--color-premium-secondary, #EDE7F6); font-weight:bold;">+</span>
+                </a>
+                <p>Simplifying healthcare through technology and compassionate care.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html">BabyCare</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                 <h4>About Us</h4>
+                 <ul>
+                    <li><a href="aboutus.html">Our Mission</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                 <h4>Contact</h4>
+                 <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Partnerships</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Basic setup (footer year, menu toggle - handled in script.js or add here if specific)
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan && !currentYearSpan.textContent) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            if (menuToggle && mainNav) {
+                 menuToggle.addEventListener('click', () => {
+                     menuToggle.classList.toggle('is-active');
+                     mainNav.classList.toggle('is-active');
+                     const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                     menuToggle.setAttribute('aria-expanded', !isExpanded);
+                 });
+             }
+
+            // Placeholder for logged-in/out state for header (if needed)
+            const isLoggedIn = false; // Example: determine actual login state
+            const loggedInActions = document.querySelector('.logged-in-actions');
+            const loggedOutActions = document.querySelector('.logged-out-actions');
+            const mobileAuthLinks = document.querySelectorAll('.mobile-auth'); // for showing/hiding login/signup or logout
+
+            if (loggedInActions && loggedOutActions) {
+                if (isLoggedIn) {
+                    loggedInActions.style.display = 'flex';
+                    loggedOutActions.style.display = 'none';
+                    mobileAuthLinks.forEach(link => {
+                        if (link.querySelector('a').innerHTML.includes("Logout")) link.style.display = 'block'; // Check link text
+                        else link.style.display = 'none';
+                    });
+                } else {
+                    loggedInActions.style.display = 'none';
+                    loggedOutActions.style.display = 'flex';
+                     mobileAuthLinks.forEach(link => {
+                        if (link.querySelector('a').innerHTML.includes("Logout")) link.style.display = 'none'; // Check link text
+                        else link.style.display = 'block'; // Or 'list-item' depending on CSS
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FloraCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="signup-page auth-page">
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-flora">Flora</span><span class="logo-care">Care</span>
+            </a>
+            <nav class="main-nav">
+                 <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gynecare.html">GyneCare</a></li>
+                    <li><a href="babycare.html">BabyCare</a></li>
+                    <li><a href="floracare+.html">FloraCare+</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    
+                    
+                    <li class="mobile-auth" style="display: none;"><a href="#" class="btn btn-outline btn-logout mobile-logout-btn">Logout</a></li>
+                 </ul>
+            </nav>
+             <div class="header-actions logged-out-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary active">Sign Up</a>
+            </div>
+             <div class="header-actions logged-in-actions" style="display: none;">
+                <span class="user-greeting">Hi!</span>
+                <a href="#" class="btn btn-outline btn-logout">Logout</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                 <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <div class="container">
+            <div class="auth-form-container">
+                <h2>Create Your Account</h2>
+                <p class="auth-subtitle">Join FloraCare to manage your health journey.</p>
+                <form class="auth-form" action="#" method="post">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" name="name" required placeholder="Your Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" name="email" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" required placeholder="Create a strong password (min. 6 characters)">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" name="confirmPassword" required placeholder="Re-enter your password">
+                    </div>
+                    <div class="form-group terms">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a>.</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-button">Sign Up</button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account? <a href="login.html" class="auth-link">Login</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer minimal-footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> FloraCare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan && !currentYearSpan.textContent) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            if (menuToggle && mainNav) {
+                 menuToggle.addEventListener('click', () => {
+                     menuToggle.classList.toggle('is-active');
+                     mainNav.classList.toggle('is-active');
+                     const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                     menuToggle.setAttribute('aria-expanded', !isExpanded);
+                 });
+             }
+
+            const isLoggedIn = false; // Example: determine actual login state
+            const loggedInActions = document.querySelector('.logged-in-actions');
+            const loggedOutActions = document.querySelector('.logged-out-actions');
+            const mobileAuthLis = document.querySelectorAll('.main-nav ul li.mobile-auth');
+
+            if (loggedInActions && loggedOutActions) {
+                if (isLoggedIn) {
+                    loggedInActions.style.display = 'flex';
+                    loggedOutActions.style.display = 'none';
+                    mobileAuthLis.forEach(li => {
+                        const link = li.querySelector('a');
+                        if (link && link.classList.contains('mobile-logout-btn')) {
+                            li.style.display = 'block'; // Or 'list-item'
+                        } else {
+                            li.style.display = 'none';
+                        }
+                    });
+                } else {
+                    loggedInActions.style.display = 'none';
+                    loggedOutActions.style.display = 'flex';
+                     mobileAuthLis.forEach(li => {
+                        const link = li.querySelector('a');
+                        if (link && link.classList.contains('mobile-logout-btn')) {
+                           li.style.display = 'none';
+                        } else {
+                           li.style.display = 'block'; // Or 'list-item'
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1741 @@
+/* ==========================================================================
+   FloraCare Stylesheet
+   ========================================================================== */
+
+/* --- Root Variables for Modern Styling --- */
+:root {
+    /* Fonts */
+    --font-primary: 'Poppins', sans-serif;
+
+    /* Colors - Default Blue Theme */
+    --color-primary: #3B82F6; /* Main Blue */
+    --color-primary-dark: #2563EB; /* Darker Blue for hover */
+    --color-secondary: #EBF3FF; /* Lighter blue accent */
+    --color-text-dark: #111827; /* Near black for high contrast */
+    --color-text-medium: #4B5563; /* Medium grey for body text */
+    --color-text-light: #6B7280; /* Lighter grey for subtitles */
+    --color-text-on-primary: #FFFFFF; /* White text on blue elements */
+    --color-text-footer: #D1D5DB; /* Light grey for footer text */
+    --color-star: #FACC15; /* Yellow for rating stars */
+
+    /* GyneCare Theme Colors (Pink/White) */
+    --color-gyne-primary: #EC4899; /* Main Pink */
+    --color-gyne-primary-dark: #DB2777; /* Darker Pink */
+    --color-gyne-secondary: #FCE7F3; /* Lighter Pink Accent */
+    --color-gyne-background: #FFF1F2; /* Very Light Pink Background for sections */
+    --color-gyne-text-dark: #831843; /* Darker Pink/Maroon for headings */
+    --color-gyne-text-medium: #9d174d; /* Medium Pink for text */
+    --color-gyne-text-light: #be185d; /* Lighter Pink for subtitles */
+    --color-gyne-card-bg: #FFFFFF; /* White card background */
+    --color-gyne-border: #FBCFE8; /* Soft pink border */
+
+    /* Background colors */
+    --color-background-light: #FFFFFF; /* Primary background */
+    --color-background-medium: #F9FAFB; /* Section background (specialty, auth, feedback) */
+    --color-background-card: #FFFFFF; /* Card background */
+    --color-background-footer: #1F2937; /* Dark footer background */
+
+    /* Borders */
+    --border-color-soft: #E5E7EB; /* Subtle borders */
+    --border-color-input: #D1D5DB; /* Input field borders */
+    --border-radius-small: 6px; /* Buttons, inputs */
+    --border-radius-medium: 12px; /* Cards */
+    --border-radius-large: 16px; /* Image placeholders, form container */
+
+    /* Shadows */
+    --shadow-soft: 0 4px 15px rgba(17, 24, 39, 0.06); /* Subtle shadow for header, cards */
+    --shadow-medium: 0 8px 25px rgba(17, 24, 39, 0.08); /* Medium shadow for hover, images */
+    --shadow-large: 0 12px 35px rgba(17, 24, 39, 0.1); /* Stronger shadow for auth form */
+
+    /* Transitions */
+    --transition-smooth: all 0.3s ease-in-out; /* Standard transition */
+
+    /* Spacing */
+    --spacing-base: 8px; /* Base unit for margins and padding */
+}
+
+/* --- Basic Reset & Body Defaults --- */
+* {
+    box-sizing: border-box; /* Include padding and border in element's total width/height */
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    font-size: 16px; /* Base font size for rem units */
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.7; /* Improve text readability */
+    color: var(--color-text-medium);
+    background-color: var(--color-background-light);
+    font-weight: 400; /* Default font weight */
+    -webkit-font-smoothing: antialiased; /* Font smoothing for WebKit browsers */
+    -moz-osx-font-smoothing: grayscale; /* Font smoothing for Firefox */
+    display: flex; /* Enable flexbox for sticky footer */
+    flex-direction: column; /* Stack elements vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+main {
+    flex-grow: 1; /* Allow main content to expand and push footer down */
+}
+
+.container {
+    max-width: 1180px; /* Maximum width of content */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 0 calc(var(--spacing-base) * 3); /* 24px side padding */
+}
+
+/* --- Button Styles --- */
+.btn {
+    display: inline-block; /* Allow padding/margin */
+    padding: calc(var(--spacing-base) * 1.2) calc(var(--spacing-base) * 3); /* Button padding */
+    border: 1px solid transparent; /* Base border for consistent height */
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from links styled as buttons */
+    font-weight: 600; /* Bold button text */
+    font-size: 0.9em; /* Slightly smaller button font */
+    transition: var(--transition-smooth); /* Smooth transitions on hover */
+    letter-spacing: 0.5px; /* Subtle letter spacing */
+    text-align: center;
+    line-height: 1.5; /* Consistent button height */
+    white-space: nowrap; /* Prevent button text wrapping */
+}
+
+/* Primary Button Style (Filled Blue - Default) */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3); /* Subtle shadow */
+}
+.btn-primary:hover, .btn-primary.active { /* Hover and active states */
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4); /* Enhanced shadow */
+}
+
+/* Outline Button Style (Blue Outline - Default) */
+.btn-outline {
+    background-color: transparent;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+.btn-outline:hover, .btn-outline.active { /* Hover and active states */
+    background-color: var(--color-secondary); /* Light blue background */
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark); /* Darker blue text */
+}
+
+/* Secondary Button Style (Used in About section) */
+.btn-secondary {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3);
+}
+.btn-secondary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+}
+/* Specific margin for the button in the About section */
+.about-section .btn-secondary {
+    margin-top: calc(var(--spacing-base) * 2.5);
+}
+
+/* Small Button Variant */
+.btn-small {
+    padding: calc(var(--spacing-base) * 0.8) calc(var(--spacing-base) * 2);
+    font-size: 0.8em;
+}
+
+
+/* --- Header Styles --- */
+/* Header styles remain consistent across all pages (blue theme) */
+.site-header {
+    background-color: var(--color-background-light);
+    padding: calc(var(--spacing-base) * 1.5) 0; /* Header vertical padding */
+    border-bottom: 1px solid var(--border-color-soft); /* Subtle separator line */
+    position: sticky; /* Make header stick to top on scroll */
+    top: 0;
+    z-index: 100; /* Ensure header is above other content */
+    box-shadow: var(--shadow-soft); /* Subtle shadow when sticky */
+    flex-shrink: 0; /* Prevent header from shrinking when content is short */
+}
+.site-header .container {
+    display: flex;
+    justify-content: space-between; /* Space out logo, nav, actions */
+    align-items: center; /* Vertically align items */
+    gap: calc(var(--spacing-base) * 2); /* Spacing between header items */
+}
+
+/* Logo Styling */
+.logo {
+    font-size: 1.6em;
+    font-weight: 700; /* Bold logo */
+    text-decoration: none;
+    white-space: nowrap; /* Prevent logo text from wrapping */
+}
+.logo-flora {
+    color: var(--color-primary); /* Blue color for "Flora" */
+}
+.logo-care {
+    color: var(--color-text-dark); /* Dark text color for "Care" */
+}
+
+/* --- Navigation Styles --- */
+.main-nav {
+    margin-left: auto; /* Push nav towards center, away from logo */
+}
+.main-nav ul {
+    list-style: none; /* Remove default list bullets */
+    display: flex; /* Horizontal layout for desktop */
+    gap: calc(var(--spacing-base) * 3.5); /* Spacing between nav items */
+}
+.main-nav a {
+    text-decoration: none;
+    color: var(--color-text-medium);
+    font-weight: 500; /* Medium weight for nav links */
+    transition: color 0.3s ease; /* Smooth color transition */
+    position: relative; /* Needed for underline effect */
+    padding-bottom: calc(var(--spacing-base) * 0.5); /* Space for underline */
+    font-size: 0.95em; /* Slightly smaller nav font */
+}
+/* Underline effect on hover/active */
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Position underline slightly below text */
+    left: 0;
+    width: 0; /* Hidden by default */
+    height: 2px;
+    background-color: var(--color-primary); /* Blue underline */
+    transition: width 0.3s ease; /* Animate width */
+}
+.main-nav a:hover, .main-nav a.active {
+    color: var(--color-primary); /* Blue text on hover/active */
+}
+.main-nav a:hover::after, .main-nav a.active::after {
+    width: 100%; /* Show underline */
+}
+/* Hide mobile-specific auth links on desktop */
+.mobile-auth {
+    display: none;
+}
+
+/* Header Actions (Login/Sign Up Buttons for Desktop) */
+.header-actions {
+    display: flex; /* Use flexbox for button layout */
+    align-items: center;
+    gap: var(--spacing-base); /* Space between buttons */
+}
+
+/* --- Mobile Menu Toggle Button (Hamburger) --- */
+.menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-base);
+    z-index: 110; /* Ensure it's above mobile nav */
+}
+.menu-toggle span { /* Hamburger lines */
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text-dark);
+    margin: 5px 0;
+    transition: var(--transition-smooth);
+}
+/* Animation for hamburger to 'X' when active */
+.menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.is-active span:nth-child(2) {
+    opacity: 0; /* Hide middle line */
+}
+.menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Section Padding & General Styles --- */
+section {
+    padding: calc(var(--spacing-base) * 10) 0; /* Standard vertical padding for sections */
+}
+section:last-of-type {
+    padding-bottom: calc(var(--spacing-base) * 12); /* More space before the footer */
+}
+.subtitle { /* Centered subtitle text below section headings */
+    margin-bottom: calc(var(--spacing-base) * 6); /* Space below subtitle */
+    color: var(--color-text-light);
+    max-width: 600px; /* Limit width for readability */
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.05em;
+    text-align: center;
+}
+/* Heading Styles */
+h1, h2, h3, h4 { /* Added h4 */
+    color: var(--color-text-dark);
+    font-weight: 600; /* Default bold weight */
+    line-height: 1.3; /* Consistent line height */
+}
+h1 { font-size: clamp(2.5em, 5vw, 3.5em); font-weight: 700; } /* Responsive H1 using clamp */
+h2 { font-size: clamp(1.8em, 4vw, 2.5em); } /* Responsive H2 */
+h3 { font-size: 1.4em; } /* Standard H3 */
+h4 { font-size: 1.1em; } /* Standard H4 */
+
+/* --- Hero Section Styles --- */
+.hero-section {
+    background: linear-gradient(180deg, var(--color-background-light) 0%, #F3F7FF 100%); /* Subtle blue gradient */
+    padding-top: calc(var(--spacing-base) * 12); /* More top padding */
+    padding-bottom: calc(var(--spacing-base) * 12); /* More bottom padding */
+    overflow: hidden; /* Prevent image overflow issues */
+}
+.hero-content {
+    display: flex;
+    align-items: center; /* Vertically align text and image */
+    gap: calc(var(--spacing-base) * 6); /* Space between text and image */
+}
+.hero-text {
+    flex: 1.1; /* Give text slightly more horizontal space */
+}
+.hero-text h1 {
+    margin-bottom: calc(var(--spacing-base) * 2.5); /* Space below H1 */
+}
+.hero-text p {
+    font-size: 1.1em;
+    color: var(--color-text-medium);
+    max-width: 500px; /* Limit paragraph width */
+    margin-bottom: calc(var(--spacing-base) * 4); /* Space before button */
+}
+.hero-image {
+    flex: 0.9; /* Give image slightly less horizontal space */
+    text-align: center; /* Center image/placeholder if needed */
+}
+.image-placeholder-hero { /* Style for image placeholder */
+    background-color: #e0eaff; /* Light blue background */
+    border-radius: var(--border-radius-large);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary); /* Blue text */
+    font-size: 1em;
+    min-height: 400px; /* Example height */
+    box-shadow: var(--shadow-medium);
+    position: relative; /* For potential future effects */
+}
+.hero-cta { /* Specific styling for hero button if needed */
+    margin-top: calc(var(--spacing-base) * 2); /* Space above button */
+}
+
+/* --- About Section Styles --- */
+.about-section {
+    background-color: var(--color-background-light);
+}
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-base) * 8); /* Larger gap between image and text */
+}
+.about-image {
+    flex: 0 0 40%; /* Fixed percentage width for image container */
+    border-radius: var(--border-radius-large);
+    overflow: hidden; /* Clip image to rounded corners */
+    box-shadow: var(--shadow-medium);
+}
+.image-placeholder-about { /* Style for image placeholder */
+    background-color: #e0eaff; /* Light blue */
+    border-radius: var(--border-radius-large);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    font-size: 1em;
+    min-height: 350px; /* Example height */
+}
+.about-text {
+    flex: 1; /* Take remaining horizontal space */
+}
+.about-text h2 {
+    margin-bottom: calc(var(--spacing-base) * 2.5); /* Space below H2 */
+}
+.about-text p {
+    color: var(--color-text-medium);
+    margin-bottom: calc(var(--spacing-base) * 2); /* Space between paragraphs */
+}
+.about-text p:last-of-type {
+    margin-bottom: calc(var(--spacing-base) * 3); /* More space before button */
+}
+
+/* --- Specialty Section Styles --- */
+.specialty-section {
+    background-color: var(--color-background-medium); /* Light grey background */
+    text-align: center;
+}
+#specialty-heading {
+    margin-bottom: calc(var(--spacing-base) * 2); /* Space below heading */
+}
+.specialty-cards {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+    gap: calc(var(--spacing-base) * 4); /* Gap between cards */
+    margin-top: calc(var(--spacing-base) * 6); /* Space below subtitle */
+}
+/* Individual Card Styling */
+.card {
+    background-color: var(--color-background-card);
+    padding: calc(var(--spacing-base) * 4); /* Card internal padding */
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    transition: var(--transition-smooth);
+    border: 1px solid var(--border-color-soft); /* Subtle border */
+    display: flex; /* Use flexbox for content alignment */
+    flex-direction: column; /* Stack content vertically */
+}
+.card:hover {
+   transform: translateY(-8px); /* Lift effect on hover */
+   box-shadow: var(--shadow-medium); /* Stronger shadow on hover */
+}
+/* Highlighted Card Style (Blue) */
+.card-highlight {
+    background-color: var(--color-primary); /* Blue background */
+    color: var(--color-text-on-primary); /* White text */
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3); /* Blue shadow */
+    border: none; /* Remove border */
+}
+.card-highlight:hover {
+    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4); /* Enhanced blue shadow */
+}
+.card-highlight h3 {
+    color: var(--color-text-on-primary); /* White heading */
+}
+.card-highlight p {
+    color: var(--color-secondary); /* Lighter blue text for contrast */
+}
+.card-highlight .card-icon {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white bg */
+    color: var(--color-primary); /* Blue icon */
+}
+/* Card Content Styling */
+.card h3 {
+    margin-top: calc(var(--spacing-base) * 2.5); /* Space above H3 */
+    margin-bottom: calc(var(--spacing-base) * 1.5); /* Space below H3 */
+}
+.card p {
+    color: var(--color-text-light);
+    font-size: 0.95em;
+    flex-grow: 1; /* Allow paragraph to fill vertical space */
+}
+/* Card Icons Styling */
+.card-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-secondary); /* Light blue background */
+    border-radius: 50%; /* Circular icon background */
+    margin: 0 auto calc(var(--spacing-base) * 2); /* Center icon horizontally, space below */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary); /* Blue icon color */
+    font-size: 28px; /* Icon size (adjust if using icon font/SVG) */
+    transition: var(--transition-smooth);
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+.card:hover .card-icon {
+    transform: scale(1.1); /* Scale icon on card hover */
+}
+
+/* --- Feedback / Testimonials Section Styles --- */
+.feedback-section {
+    background-color: var(--color-background-light); /* White background */
+    text-align: center;
+}
+#feedback-heading {
+    margin-bottom: calc(var(--spacing-base) * 2); /* Space below heading */
+}
+/* Testimonial Cards Layout */
+.testimonial-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: calc(var(--spacing-base) * 4); /* Gap between cards */
+    margin-top: calc(var(--spacing-base) * 6); /* Space below subtitle */
+}
+/* Individual Testimonial Card Styling */
+.testimonial-card {
+    background-color: var(--color-background-card);
+    padding: calc(var(--spacing-base) * 4); /* Card internal padding */
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-soft);
+    text-align: left; /* Align text left */
+    border: 1px solid var(--border-color-soft);
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    transition: var(--transition-smooth);
+}
+.testimonial-card:hover {
+    transform: translateY(-5px); /* Subtle lift */
+    box-shadow: var(--shadow-medium);
+}
+/* Quote Icon Styling */
+.testimonial-icon {
+    font-size: 2em;
+    color: var(--color-primary);
+    margin-bottom: calc(var(--spacing-base) * 1.5);
+    line-height: 1; /* Adjust line height for icon */
+}
+/* Testimonial Text Styling */
+.testimonial-text {
+    color: var(--color-text-medium);
+    font-style: italic; /* Italicize quote */
+    margin-bottom: calc(var(--spacing-base) * 2.5); /* Space below text */
+    flex-grow: 1; /* Allow text to fill space */
+}
+/* Testimonial Author/Rating Styling */
+.testimonial-author {
+    margin-top: auto; /* Push author to bottom */
+    padding-top: calc(var(--spacing-base) * 2); /* Space above author */
+    border-top: 1px solid var(--border-color-soft); /* Separator line */
+}
+.testimonial-author h4 {
+    margin-bottom: calc(var(--spacing-base) * 0.5); /* Space below name */
+    font-size: 1em;
+    font-weight: 600;
+}
+.testimonial-rating {
+    color: var(--color-star); /* Yellow star color */
+    font-size: 0.9em;
+}
+.testimonial-rating i {
+    margin-right: 2px; /* Tiny space between stars */
+}
+
+
+/* --- Authentication Page Styles (Login/Sign Up) --- */
+.auth-page {
+    padding: calc(var(--spacing-base) * 8) 0; /* Vertical padding for auth pages */
+    background-color: var(--color-background-medium); /* Light background */
+    display: flex;
+    align-items: center; /* Vertically center form container */
+    flex-grow: 1; /* Ensure page takes available vertical space */
+}
+.auth-form-container {
+    max-width: 450px; /* Limit form width */
+    margin: 0 auto; /* Center horizontally */
+    background-color: var(--color-background-light);
+    padding: calc(var(--spacing-base) * 5); /* 40px internal padding */
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-large); /* Prominent shadow */
+    text-align: center; /* Center heading/subtitles */
+}
+.auth-form-container h2 {
+    margin-bottom: var(--spacing-base); /* Space below H2 */
+    font-size: 1.8em;
+    color: var(--color-text-dark);
+}
+.auth-subtitle {
+    color: var(--color-text-medium);
+    margin-bottom: calc(var(--spacing-base) * 4); /* 32px space below subtitle */
+    font-size: 1em;
+}
+.auth-form {
+    text-align: left; /* Align form labels and inputs left */
+}
+.form-group {
+    margin-bottom: calc(var(--spacing-base) * 2.5); /* 20px space between form groups */
+    position: relative; /* For absolute positioning of 'forgot password' link */
+}
+.form-group label {
+    display: block; /* Label on its own line */
+    font-weight: 500;
+    margin-bottom: var(--spacing-base); /* Space below label */
+    font-size: 0.9em;
+    color: var(--color-text-medium);
+}
+/* Input field styling */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%; /* Full width inputs */
+    padding: calc(var(--spacing-base) * 1.5); /* 12px padding */
+    border: 1px solid var(--border-color-input);
+    border-radius: var(--border-radius-small);
+    font-size: 1em;
+    font-family: var(--font-primary); /* Ensure consistent font */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth focus transition */
+}
+/* Input focus styling */
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: var(--color-primary); /* Blue border on focus */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Blue focus ring */
+}
+/* "Forgot Password?" link styling */
+.forgot-password {
+    position: absolute;
+    right: 0;
+    top: 0; /* Align with label */
+    font-size: 0.85em;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.forgot-password:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+/* Auth form submit button */
+.auth-button {
+    width: 100%; /* Full width button */
+    padding: calc(var(--spacing-base) * 1.8); /* Larger button padding */
+    font-size: 1em;
+    margin-top: var(--spacing-base); /* Space above button */
+}
+/* Link to switch between Login/Sign Up */
+.auth-switch {
+    margin-top: calc(var(--spacing-base) * 3); /* 24px space above */
+    font-size: 0.95em;
+    color: var(--color-text-medium);
+}
+.auth-link { /* Style for links within auth forms */
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.auth-link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+/* Terms checkbox styling */
+.form-group.terms {
+    display: flex;
+    align-items: flex-start; /* Align checkbox top with label */
+    gap: var(--spacing-base); /* Space between checkbox and label */
+    margin-bottom: calc(var(--spacing-base) * 3); /* Space below terms */
+}
+.form-group.terms input[type="checkbox"] {
+    width: auto; /* Override default width */
+    accent-color: var(--color-primary); /* Style checkbox color (browser support varies) */
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+    margin-top: 4px; /* Fine-tune vertical alignment */
+    flex-shrink: 0; /* Prevent checkbox shrinking */
+}
+.form-group.terms label {
+    margin-bottom: 0; /* Remove bottom margin */
+    font-weight: 400; /* Regular weight */
+    font-size: 0.9em;
+    color: var(--color-text-medium);
+    line-height: 1.4;
+}
+
+/* --- Footer Styles --- */
+.site-footer {
+    background-color: var(--color-background-footer); /* Dark background */
+    color: var(--color-text-footer); /* Light text */
+    padding-top: calc(var(--spacing-base) * 8); /* 64px top padding */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+}
+/* Optional: Minimal footer for auth pages */
+.minimal-footer {
+    padding-top: 0; /* Remove top padding */
+    background-color: var(--color-background-medium); /* Match auth page background */
+}
+.minimal-footer .footer-content {
+    display: none; /* Hide main footer link sections */
+}
+.minimal-footer .footer-bottom {
+     border-top: 1px solid var(--border-color-soft); /* Lighter border */
+     padding: calc(var(--spacing-base) * 2.5) 0; /* 20px padding */
+     color: var(--color-text-light); /* Slightly darker text */
+}
+/* Footer Content Layout (Grid) */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: calc(var(--spacing-base) * 5); /* 40px gap */
+    padding-bottom: calc(var(--spacing-base) * 6); /* Space above bottom bar */
+}
+.footer-about .footer-logo {
+    display: inline-block; /* Prevent taking full width */
+    margin-bottom: calc(var(--spacing-base) * 2); /* Space below logo */
+    font-size: 1.8em; /* Slightly larger footer logo */
+}
+.footer-about p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    max-width: 300px; /* Limit width of description */
+}
+/* Footer Link Sections */
+.footer-links h4 {
+    color: var(--color-text-on-primary); /* White heading */
+    font-weight: 600;
+    margin-bottom: calc(var(--spacing-base) * 2.5); /* 20px space below heading */
+    font-size: 1.1em;
+}
+.footer-links ul {
+    list-style: none; /* Remove bullets */
+}
+.footer-links li {
+    margin-bottom: calc(var(--spacing-base) * 1.5); /* 12px space between links */
+}
+.footer-links a {
+    color: var(--color-text-footer); /* Light grey link text */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.95em;
+}
+.footer-links a:hover {
+    color: var(--color-primary); /* Blue hover color */
+}
+/* Footer Bottom Bar */
+.footer-bottom {
+    border-top: 1px solid #374151; /* Darker border separator */
+    padding: calc(var(--spacing-base) * 2.5) 0; /* 20px padding */
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--color-text-light);
+}
+
+/* ==========================================================================
+   GyneCare Page Specific Styles
+   ========================================================================== */
+
+/* Apply pink theme overrides when the .gynecare-page class is on the body */
+.gynecare-page {
+    background-color: var(--color-background-light); /* Keep main background light */
+}
+
+/* Page Title Section */
+.gynecare-page .page-title-section {
+    background: linear-gradient(135deg, var(--color-gyne-secondary) 0%, var(--color-gyne-primary) 100%);
+    padding: calc(var(--spacing-base) * 6) 0;
+    text-align: center;
+    color: var(--color-text-on-primary);
+}
+.gynecare-page .page-title-section h1 {
+    color: var(--color-text-on-primary);
+    margin-bottom: var(--spacing-base);
+    font-size: clamp(2.2em, 5vw, 3em);
+}
+.gynecare-page .page-title-section p {
+    font-size: 1.1em;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Dashboard Section */
+.gynecare-page .gyne-dashboard-section {
+    background-color: var(--color-background-light); /* White background for dashboard */
+}
+.gynecare-page .gyne-dashboard-section h2 {
+    text-align: center;
+    color: var(--color-gyne-text-dark);
+    margin-bottom: calc(var(--spacing-base) * 5);
+}
+.gynecare-page .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--spacing-base) * 4);
+}
+.gynecare-page .dashboard-card {
+    background-color: var(--color-gyne-card-bg);
+    padding: calc(var(--spacing-base) * 3) calc(var(--spacing-base) * 3.5);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-gyne-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content */
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.gynecare-page .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+.gynecare-page .dashboard-card .card-icon {
+    background-color: var(--color-gyne-secondary); /* Light pink icon bg */
+    color: var(--color-gyne-primary); /* Pink icon */
+    width: 56px; /* Slightly smaller */
+    height: 56px;
+    font-size: 24px;
+    margin-bottom: calc(var(--spacing-base) * 2);
+}
+.gynecare-page .dashboard-card h3 {
+    color: var(--color-gyne-text-dark);
+    margin-bottom: var(--spacing-base);
+    font-size: 1.3em;
+}
+.gynecare-page .dashboard-card p {
+    color: var(--color-text-medium); /* Use standard medium text color */
+    font-size: 0.95em;
+    margin-bottom: calc(var(--spacing-base) * 2);
+    flex-grow: 1; /* Allow p to grow */
+}
+.gynecare-page .dashboard-card ul {
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    margin-bottom: calc(var(--spacing-base) * 2);
+    font-size: 0.9em;
+    color: var(--color-text-medium);
+    text-align: left; /* Align list items left */
+    width: 100%; /* Ensure list takes width */
+    padding-left: var(--spacing-base); /* Indent list */
+}
+.gynecare-page .dashboard-card li {
+    margin-bottom: var(--spacing-base);
+    position: relative;
+    padding-left: calc(var(--spacing-base) * 2);
+}
+.gynecare-page .dashboard-card li::before { /* Custom bullet */
+    content: '•';
+    color: var(--color-gyne-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.gynecare-page .dashboard-card .btn { /* Pink buttons */
+    background-color: var(--color-gyne-primary);
+    border-color: var(--color-gyne-primary);
+    color: var(--color-text-on-primary);
+    margin-top: auto; /* Push button to bottom */
+}
+.gynecare-page .dashboard-card .btn:hover {
+    background-color: var(--color-gyne-primary-dark);
+    border-color: var(--color-gyne-primary-dark);
+}
+.gynecare-page .dashboard-card small {
+    font-size: 0.8em;
+    color: var(--color-text-light);
+    margin-top: var(--spacing-base);
+}
+/* Placeholders within dashboard cards */
+.gynecare-page .tracker-ui-placeholder {
+    border: 1px dashed var(--color-gyne-border);
+    padding: var(--spacing-base);
+    margin-bottom: calc(var(--spacing-base) * 2);
+    border-radius: var(--border-radius-small);
+    width: 100%;
+    font-size: 0.9em;
+}
+.gynecare-page .tracker-ui-placeholder p { margin-bottom: var(--spacing-base); }
+.gynecare-page .calendar-placeholder {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gyne-secondary);
+    border-radius: var(--border-radius-small);
+    color: var(--color-gyne-text-medium);
+}
+
+/* Articles Section */
+.gynecare-page .articles-section {
+    background-color: var(--color-gyne-background); /* Very light pink background */
+}
+.gynecare-page .articles-section h2 {
+    text-align: center;
+    color: var(--color-gyne-text-dark);
+    margin-bottom: calc(var(--spacing-base) * 5);
+}
+.gynecare-page .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--spacing-base) * 5); /* Larger gap between categories */
+}
+.gynecare-page .article-category h3 {
+    color: var(--color-gyne-text-dark);
+    margin-bottom: calc(var(--spacing-base) * 3);
+    padding-bottom: var(--spacing-base);
+    border-bottom: 2px solid var(--color-gyne-primary);
+    display: inline-block;
+}
+.gynecare-page .article-card {
+    background-color: var(--color-gyne-card-bg);
+    padding: calc(var(--spacing-base) * 3);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-soft);
+    margin-bottom: calc(var(--spacing-base) * 3);
+    border: 1px solid var(--color-gyne-border);
+    transition: var(--transition-smooth);
+}
+.gynecare-page .article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+.gynecare-page .article-card h4 {
+    color: var(--color-gyne-text-medium); /* Medium pink heading */
+    margin-bottom: var(--spacing-base);
+    font-size: 1.15em;
+}
+.gynecare-page .article-card p {
+    font-size: 0.95em;
+    color: var(--color-text-medium);
+    margin-bottom: calc(var(--spacing-base) * 2);
+}
+.gynecare-page .article-card .auth-link { /* Pink link */
+    color: var(--color-gyne-primary);
+    font-weight: 500;
+}
+.gynecare-page .article-card .auth-link:hover {
+    color: var(--color-gyne-primary-dark);
+}
+.gynecare-page .article-card .auth-link i { /* Arrow icon */
+    margin-left: calc(var(--spacing-base) * 0.5);
+    transition: transform 0.3s ease;
+}
+.gynecare-page .article-card .auth-link:hover i {
+    transform: translateX(3px);
+}
+
+/* Comments Section */
+.gynecare-page .comments-section {
+    background-color: var(--color-background-light);
+}
+.gynecare-page .comments-section h2 {
+    text-align: center;
+    color: var(--color-gyne-text-dark);
+}
+.gynecare-page .comments-section .subtitle {
+    color: var(--color-gyne-text-light); /* Lighter pink subtitle */
+}
+.gynecare-page .comment-form-placeholder,
+.gynecare-page .comments-list-placeholder {
+    max-width: 700px;
+    margin: calc(var(--spacing-base) * 4) auto 0 auto;
+    background-color: var(--color-gyne-card-bg);
+    padding: calc(var(--spacing-base) * 3);
+    border-radius: var(--border-radius-medium);
+    border: 1px solid var(--color-gyne-border);
+}
+.gynecare-page .comment-form-placeholder textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: var(--spacing-base);
+    border: 1px solid var(--border-color-input);
+    border-radius: var(--border-radius-small);
+    font-family: var(--font-primary);
+    font-size: 1em;
+    margin-bottom: var(--spacing-base);
+    resize: vertical; /* Allow vertical resize */
+}
+.gynecare-page .comment-form-placeholder .btn { /* Pink button */
+    background-color: var(--color-gyne-primary);
+    border-color: var(--color-gyne-primary);
+    color: var(--color-text-on-primary);
+    float: right; /* Align button right */
+}
+.gynecare-page .comment-form-placeholder .btn:hover {
+    background-color: var(--color-gyne-primary-dark);
+    border-color: var(--color-gyne-primary-dark);
+}
+.gynecare-page .comment-form-placeholder .btn[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.gynecare-page .comments-list-placeholder h4 {
+    color: var(--color-gyne-text-dark);
+    margin-bottom: calc(var(--spacing-base) * 2);
+}
+.gynecare-page .comment-item {
+    border-bottom: 1px solid var(--color-gyne-border);
+    padding: calc(var(--spacing-base) * 2) 0;
+}
+.gynecare-page .comment-item:last-child {
+    border-bottom: none;
+}
+.gynecare-page .comment-item p {
+    margin-bottom: calc(var(--spacing-base) * 0.5);
+    color: var(--color-text-medium);
+}
+.gynecare-page .comment-item small {
+    font-size: 0.8em;
+    color: var(--color-text-light);
+}
+
+/* --- Responsive Adjustments --- */
+
+/* Tablet Styles (e.g., <= 992px) */
+@media (max-width: 992px) {
+    html {
+        font-size: 15px; /* Slightly smaller base font */
+    }
+    /* Stack hero and about sections */
+    .hero-content, .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: calc(var(--spacing-base) * 4);
+    }
+    .hero-text, .about-text {
+        margin-bottom: calc(var(--spacing-base) * 4);
+    }
+    .hero-text p, .about-text p {
+        max-width: 100%; /* Allow text to take full width */
+    }
+     .about-image {
+        flex-basis: auto; /* Reset flex basis */
+        width: 80%; /* Adjust image width */
+        max-width: 450px;
+    }
+    /* Reduce section padding */
+    section {
+        padding: calc(var(--spacing-base) * 8) 0;
+    }
+    /* Adjust footer grid */
+     .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: calc(var(--spacing-base) * 4);
+    }
+    /* Center footer about section on tablet */
+    .footer-about {
+        grid-column: 1 / -1; /* Span full width */
+        text-align: center;
+    }
+     .footer-about p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* Reduce auth page padding */
+     .auth-page {
+        padding: calc(var(--spacing-base) * 6) 0;
+     }
+     /* Adjust testimonial grid */
+     .testimonial-cards {
+         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+         gap: calc(var(--spacing-base) * 3);
+     }
+     /* Adjust GyneCare grids */
+     .gynecare-page .dashboard-grid {
+         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+         gap: calc(var(--spacing-base) * 3);
+     }
+      .gynecare-page .article-grid {
+         grid-template-columns: 1fr; /* Stack categories */
+         gap: calc(var(--spacing-base) * 4);
+     }
+}
+
+/* Mobile Styles (e.g., <= 768px) */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; /* Further reduce base font */
+    }
+    :root {
+        --spacing-base: 7px; /* Slightly reduce base spacing unit */
+    }
+
+    /* --- Mobile Header & Navigation --- */
+     .site-header .container {
+        position: relative; /* Needed for absolute positioning of mobile nav */
+    }
+     /* Hide desktop elements */
+     .main-nav {
+        display: none; /* Hide standard nav container by default */
+     }
+     .header-actions {
+        display: none; /* Hide desktop buttons */
+     }
+     /* Show mobile toggle button */
+    .menu-toggle {
+        display: block;
+    }
+
+     /* Style the mobile navigation container when active */
+    .main-nav.is-active {
+        display: block; /* Show the nav container */
+        position: absolute;
+        top: 100%; /* Position below header */
+        left: 0;
+        right: 0;
+        background-color: var(--color-background-light);
+        box-shadow: var(--shadow-medium);
+        border-top: 1px solid var(--border-color-soft);
+        padding: var(--spacing-base) 0;
+        z-index: 99; /* Below header but above content */
+    }
+     /* Style mobile nav list */
+     .main-nav.is-active ul {
+        flex-direction: column; /* Stack links vertically */
+        gap: 0; /* Remove gap */
+        width: 100%;
+    }
+     /* Style mobile nav list items */
+     .main-nav.is-active li {
+        width: 100%;
+     }
+     .main-nav.is-active li a {
+        display: block; /* Make link take full width */
+        padding: calc(var(--spacing-base) * 2) calc(var(--spacing-base) * 3); /* Link padding */
+        width: 100%;
+        border-bottom: 1px solid var(--border-color-soft); /* Separator */
+        color: var(--color-text-dark); /* Darker text */
+        font-weight: 500;
+    }
+    /* Remove border from last item */
+    .main-nav.is-active li:last-child a {
+        border-bottom: none;
+    }
+    /* Remove underline effect */
+     .main-nav.is-active li a::after {
+        display: none;
+     }
+     /* Hover/active state for mobile links */
+     .main-nav.is-active li a:hover,
+     .main-nav.is-active li a.active {
+        background-color: var(--color-secondary); /* Light blue background */
+        color: var(--color-primary); /* Blue text */
+     }
+
+    /* Show mobile auth links within the active mobile menu */
+     .main-nav.is-active .mobile-auth {
+        display: block;
+     }
+     /* Style the mobile Sign Up button within the nav */
+     .main-nav.is-active .mobile-signup-btn {
+        display: inline-block; /* Make it button-like */
+        width: auto; /* Don't force full width */
+        padding: calc(var(--spacing-base) * 1.2) calc(var(--spacing-base) * 3); /* Match button padding */
+        margin: var(--spacing-base) var(--spacing-base) * 3; /* Add margin */
+        text-align: center;
+        border: 1px solid transparent; /* Override potential link styles */
+        line-height: 1.5;
+     }
+      /* Remove bottom border from the button's list item */
+      .main-nav.is-active li.mobile-auth:last-child a.mobile-signup-btn {
+         border-bottom: none;
+      }
+
+    /* --- Other Mobile Adjustments --- */
+    /* Stack specialty cards */
+    .specialty-cards {
+        grid-template-columns: 1fr; /* Single column */
+        gap: calc(var(--spacing-base) * 3); /* Reduced gap */
+    }
+    .card {
+        width: 100%; /* Full width cards */
+        max-width: 400px; /* Optional max width */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* Stack testimonial cards */
+    .testimonial-cards {
+        grid-template-columns: 1fr; /* Single column */
+        gap: calc(var(--spacing-base) * 3);
+    }
+  
+    /* Allow Hero/About buttons to resize naturally */
+     .hero-text .btn, .about-text .btn {
+        width: auto; /* Reset width */
+        max-width: 300px; /* Optional max-width */
+        padding-left: calc(var(--spacing-base) * 4); /* Ensure good padding */
+        padding-right: calc(var(--spacing-base) * 4);
+     }
+     /* Center footer content */
+     .footer-content {
+        text-align: center;
+     }
+     .footer-links ul {
+        padding-left: 0; /* Remove default list padding */
+     }
+
+     /* Auth page mobile adjustments */
+     .auth-page {
+        padding: calc(var(--spacing-base) * 4) 0; /* Reduce padding */
+     }
+     .auth-form-container {
+        padding: calc(var(--spacing-base) * 4); /* Less padding */
+        box-shadow: var(--shadow-medium); /* Less prominent shadow */
+     }
+     .auth-form-container h2 {
+        font-size: 1.6em; /* Smaller heading */
+     }
+     .auth-subtitle {
+        font-size: 0.95em;
+        margin-bottom: calc(var(--spacing-base) * 3); /* Less space */
+     }
+     /* Slightly smaller input padding */
+     .form-group input[type="text"],
+     .form-group input[type="email"],
+     .form-group input[type="password"] {
+        padding: calc(var(--spacing-base) * 1.3);
+     }
+     /* Slightly smaller button padding */
+     .auth-button {
+        padding: calc(var(--spacing-base) * 1.6);
+     }
+     /* Smaller terms text */
+     .form-group.terms label {
+        font-size: 0.85em;
+     }
+
+     /* GyneCare Mobile Adjustments */
+     .gynecare-page .page-title-section { padding: calc(var(--spacing-base) * 5) 0; }
+     .gynecare-page .dashboard-grid { grid-template-columns: 1fr; } /* Stack dashboard cards */
+     .gynecare-page .article-grid { grid-template-columns: 1fr; } /* Stack article categories */
+     .gynecare-page .article-category { margin-bottom: calc(var(--spacing-base) * 3); }
+     .gynecare-page .comment-form-placeholder,
+     .gynecare-page .comments-list-placeholder { padding: calc(var(--spacing-base) * 2); }
+}
+
+/* ==========================================================================
+   DocVisit Page Specific Styles
+   ========================================================================== */
+
+   .docvisit-page main {
+    background-color: #F9FAFB; /* Light background for the content area */
+    flex-grow: 1;
+}
+
+.docvisit-section {
+    padding: calc(var(--spacing-base) * 6) 0 calc(var(--spacing-base) * 10); /* Adjust padding */
+    text-align: center;
+}
+
+.docvisit-title {
+    color: var(--color-primary); /* Use primary blue for the title */
+    margin-bottom: calc(var(--spacing-base) * 1.5);
+    font-weight: 700;
+}
+
+.docvisit-welcome {
+    color: var(--color-text-medium);
+    font-size: 1.1em;
+    margin-bottom: calc(var(--spacing-base) * 5); /* Space before cards */
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.docvisit-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); /* Responsive columns */
+    gap: calc(var(--spacing-base) * 5); /* Gap between cards */
+    justify-content: center; /* Center grid items horizontally */
+    max-width: 800px; /* Limit max width of the action area */
+    margin: 0 auto; /* Center the action area */
+}
+
+.action-card {
+    background-color: var(--color-background-light); /* White card background */
+    padding: calc(var(--spacing-base) * 4) calc(var(--spacing-base) * 3);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.action-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-medium);
+}
+
+.action-icon {
+    width: 70px;
+    height: 70px;
+    background-color: var(--color-secondary); /* Light blue background */
+    border-radius: 50%;
+    margin-bottom: calc(var(--spacing-base) * 2.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary); /* Blue icon */
+    font-size: 30px;
+    transition: var(--transition-smooth);
+}
+
+.action-card:hover .action-icon {
+    transform: scale(1.1);
+    background-color: var(--color-primary); /* Blue background on hover */
+    color: var(--color-text-on-primary); /* White icon on hover */
+}
+
+.action-card h3 {
+    color: var(--color-text-dark);
+    font-size: 1.5em;
+    margin-bottom: calc(var(--spacing-base) * 1.5);
+}
+
+.action-card p {
+    color: var(--color-text-medium);
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: calc(var(--spacing-base) * 3); /* Space before button */
+    flex-grow: 1; /* Allow paragraph to push button down */
+}
+
+.action-card .btn {
+    margin-top: auto; /* Push button to the bottom */
+    width: 80%; /* Make button slightly narrower than card */
+    max-width: 200px;
+    padding: calc(var(--spacing-base) * 1.2) calc(var(--spacing-base) * 2);
+}
+
+/* Specific styles for logged-in header state */
+.header-actions .user-greeting {
+    color: var(--color-text-medium);
+    font-weight: 500;
+    margin-right: var(--spacing-base);
+}
+
+
+
+/* Ensure logged-in actions display correctly */
+.logged-in-actions {
+    display: flex; /* Default state, controlled by JS */
+    align-items: center;
+}
+
+
+/* --- Responsive Adjustments for DocVisit --- */
+@media (max-width: 768px) {
+    .docvisit-actions {
+        grid-template-columns: 1fr; /* Stack cards on mobile */
+        max-width: 400px; /* Adjust max width for single column */
+        gap: calc(var(--spacing-base) * 4);
+    }
+
+    .docvisit-section {
+        padding: calc(var(--spacing-base) * 5) 0 calc(var(--spacing-base) * 8);
+    }
+
+    .docvisit-title {
+        font-size: 2em;
+    }
+
+    .docvisit-welcome {
+        font-size: 1em;
+        margin-bottom: calc(var(--spacing-base) * 4);
+    }
+
+    .action-card h3 {
+        font-size: 1.3em;
+    }
+
+    .action-card p {
+        font-size: 0.9em;
+    }
+
+    .action-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 26px;
+    }
+}
+
+/* ==========================================================================
+   Book Appointment Page Styles
+   ========================================================================== */
+
+   .book-appointment-page main {
+    background-color: var(--color-background-medium); /* Light background */
+    padding: calc(var(--spacing-base) * 6) 0;
+    flex-grow: 1;
+}
+
+.booking-form-container {
+    max-width: 800px; /* Allow slightly wider form */
+    margin: 0 auto;
+    background-color: var(--color-background-light);
+    padding: calc(var(--spacing-base) * 4) calc(var(--spacing-base) * 5);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-large);
+}
+
+.booking-form-container h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-base);
+    font-size: 1.8em;
+    color: var(--color-text-dark);
+}
+
+.booking-subtitle {
+    text-align: center;
+    color: var(--color-text-medium);
+    margin-bottom: calc(var(--spacing-base) * 4);
+    font-size: 1em;
+}
+
+.booking-form fieldset {
+    border: 1px solid var(--border-color-soft);
+    padding: calc(var(--spacing-base) * 2) calc(var(--spacing-base) * 3);
+    margin-bottom: calc(var(--spacing-base) * 3);
+    border-radius: var(--border-radius-medium);
+}
+
+.booking-form legend {
+    font-weight: 600;
+    color: var(--color-primary);
+    padding: 0 calc(var(--spacing-base) * 1);
+    font-size: 1.1em;
+}
+
+.booking-form .form-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: calc(var(--spacing-base) * 3); /* Space between columns */
+    margin-bottom: calc(var(--spacing-base) * 2); /* Space between rows */
+}
+.booking-form .form-row:last-child {
+    margin-bottom: 0;
+}
+
+.booking-form .form-group {
+    margin-bottom: 0; /* Remove default bottom margin as row handles spacing */
+    flex-grow: 1; /* Allow groups to grow */
+    flex-basis: 100%; /* Default to full width on small screens */
+}
+
+/* Column widths */
+.booking-form .form-group-half {
+    flex-basis: calc(50% - (var(--spacing-base) * 1.5)); /* Adjust for gap */
+}
+.booking-form .form-group-third {
+     flex-basis: calc(33.333% - (var(--spacing-base) * 2)); /* Adjust for gap */
+}
+
+
+.booking-form .form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: var(--spacing-base);
+    font-size: 0.9em;
+    color: var(--color-text-medium);
+}
+
+/* Input, Select, Textarea common styles */
+.booking-form .form-group input[type="text"],
+.booking-form .form-group input[type="email"],
+.booking-form .form-group input[type="password"],
+.booking-form .form-group input[type="tel"],
+.booking-form .form-group input[type="number"],
+.booking-form .form-group input[type="date"],
+.booking-form .form-group select {
+    width: 100%;
+    padding: calc(var(--spacing-base) * 1.5);
+    border: 1px solid var(--border-color-input);
+    border-radius: var(--border-radius-small);
+    font-size: 1em;
+    font-family: var(--font-primary);
+    background-color: var(--color-background-light); /* Ensure background is white */
+    color: var(--color-text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.booking-form .form-group select {
+     appearance: none; /* Remove default dropdown arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%234B5563'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E"); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right calc(var(--spacing-base) * 1.5) center;
+    background-size: 1.2em;
+    padding-right: calc(var(--spacing-base) * 4); /* Space for custom arrow */
+}
+/* Focus styles */
+.booking-form .form-group input:focus,
+.booking-form .form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+/* Placeholder text color */
+.booking-form .form-group input::placeholder {
+    color: #9CA3AF;
+    opacity: 1;
+}
+/* Style disabled select option */
+.booking-form .form-group select option[disabled] {
+    color: #9CA3AF;
+}
+
+/* Availability Slot Placeholder Styling */
+.availability-placeholder {
+    border: 1px dashed var(--border-color-input);
+    border-radius: var(--border-radius-small);
+    padding: calc(var(--spacing-base) * 1.5);
+    min-height: 50px; /* Match input height roughly */
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    align-items: center;
+    justify-content: flex-start; /* Align content/buttons left */
+    gap: var(--spacing-base); /* Gap between slot buttons */
+    background-color: #f9fafb; /* Slightly different background */
+}
+.availability-placeholder p {
+    color: var(--color-text-light);
+    font-size: 0.9em;
+    margin: 0;
+    width: 100%; /* Take full width if it's just text */
+    text-align: center;
+}
+/* Style for dynamically added slot buttons (example) */
+.slot-button {
+    background-color: var(--color-background-light);
+    border: 1px solid var(--border-color-input);
+    color: var(--color-primary);
+    padding: calc(var(--spacing-base) * 0.8) calc(var(--spacing-base) * 1.5);
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+.slot-button:hover {
+    background-color: var(--color-secondary);
+    border-color: var(--color-primary);
+}
+.slot-button.selected {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border-color: var(--color-primary);
+    font-weight: 500;
+}
+
+
+.booking-button {
+    display: block; /* Make button block level */
+    width: 100%; /* Full width */
+    max-width: 300px; /* Limit max width */
+    margin: calc(var(--spacing-base) * 4) auto 0 auto; /* Center button */
+    padding: calc(var(--spacing-base) * 1.8);
+    font-size: 1.1em;
+}
+
+/* Responsive adjustments for booking form */
+@media (max-width: 768px) {
+    .booking-form-container {
+        padding: calc(var(--spacing-base) * 3);
+    }
+    .booking-form .form-row {
+        gap: calc(var(--spacing-base) * 2); /* Reduce gap */
+        margin-bottom: calc(var(--spacing-base) * 2);
+    }
+    /* Stack columns fully on mobile */
+    .booking-form .form-group-half,
+    .booking-form .form-group-third {
+        flex-basis: 100%; /* Full width */
+    }
+    .booking-form .form-group:not(:last-child) {
+         margin-bottom: calc(var(--spacing-base) * 2); /* Add margin back when stacked */
+    }
+     .booking-form .form-row:last-child .form-group:last-child {
+         margin-bottom: 0;
+     }
+     .availability-placeholder {
+         justify-content: center; /* Center slot buttons */
+     }
+}
+
+/* ==========================================================================
+   View Appointments Page Styles
+   ========================================================================== */
+
+   .view-appointments-page main {
+    background-color: var(--color-background-medium); /* Light background */
+    padding: calc(var(--spacing-base) * 5) 0;
+    flex-grow: 1;
+}
+
+.appointments-title {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: calc(var(--spacing-base) * 1);
+    font-weight: 700;
+    font-size: 2.2em;
+}
+
+.appointments-subtitle {
+    text-align: center;
+    color: var(--color-text-medium);
+    font-size: 1.1em;
+    margin-bottom: calc(var(--spacing-base) * 5);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.appointments-section {
+    margin-bottom: calc(var(--spacing-base) * 6);
+}
+
+.appointments-section h2 {
+    font-size: 1.6em;
+    color: var(--color-text-dark);
+    margin-bottom: calc(var(--spacing-base) * 3);
+    padding-bottom: calc(var(--spacing-base) * 1);
+    border-bottom: 2px solid var(--color-primary-dark);
+    display: inline-block;
+}
+
+.appointments-list {
+    display: grid;
+    gap: calc(var(--spacing-base) * 3);
+}
+
+.appointment-card {
+    background-color: var(--color-background-light);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color-soft);
+    padding: calc(var(--spacing-base) * 2.5) calc(var(--spacing-base) * 3);
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: space-between;
+    align-items: center;
+    gap: calc(var(--spacing-base) * 2);
+    border-left: 5px solid var(--color-primary); /* Default left border color */
+    transition: box-shadow 0.3s ease;
+}
+.appointment-card:hover {
+    box-shadow: var(--shadow-medium);
+}
+
+/* Left border colors based on status */
+.appointment-card.status-upcoming { border-left-color: #3B82F6; } /* Blue */
+.appointment-card.status-completed { border-left-color: #10B981; } /* Green */
+.appointment-card.status-cancelled { border-left-color: #EF4444; } /* Red */
+
+
+.appointment-details {
+    flex-grow: 1; /* Take available space */
+    min-width: 250px; /* Ensure details don't get too squished */
+}
+
+.appointment-details .doctor-name {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: calc(var(--spacing-base) * 0.5);
+}
+
+.appointment-details .department-hospital {
+    font-size: 0.95em;
+    color: var(--color-text-medium);
+    margin-bottom: calc(var(--spacing-base) * 1.5);
+}
+
+.appointment-details .date-time {
+    font-size: 1em;
+    color: var(--color-text-dark);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-base) * 1);
+}
+.appointment-details .date-time i {
+    color: var(--color-primary); /* Icon color */
+    font-size: 0.9em;
+}
+.appointment-details .time-separator {
+    color: var(--border-color-soft);
+    margin: 0 calc(var(--spacing-base) * 0.5);
+}
+
+
+.appointment-status {
+    display: flex;
+    flex-direction: column; /* Stack badge and buttons */
+    align-items: flex-end; /* Align to the right */
+    gap: calc(var(--spacing-base) * 1.5);
+    flex-shrink: 0; /* Prevent shrinking */
+    text-align: right;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 1.5);
+    border-radius: var(--border-radius-small);
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--color-text-on-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-upcoming-badge { background-color: #3B82F6; } /* Blue */
+.status-completed-badge { background-color: #10B981; } /* Green */
+.status-cancelled-badge { background-color: #EF4444; } /* Red */
+
+.appointment-actions {
+    display: flex;
+    gap: var(--spacing-base);
+}
+
+/* Adjust button styles if needed */
+.appointment-actions .btn-small {
+    /* Already defined, maybe tweak padding/font-size if necessary */
+    font-size: 0.75em;
+    padding: calc(var(--spacing-base) * 0.7) calc(var(--spacing-base) * 1.5);
+}
+.appointment-actions .btn-cancel {
+    border-color: #EF4444; /* Red outline */
+    color: #EF4444;
+}
+.appointment-actions .btn-cancel:hover {
+    background-color: #FEF2F2; /* Very light red */
+}
+
+
+.no-appointments {
+    text-align: center;
+    color: var(--color-text-light);
+    font-style: italic;
+    padding: calc(var(--spacing-base) * 3);
+    border: 1px dashed var(--border-color-soft);
+    border-radius: var(--border-radius-medium);
+    margin-top: calc(var(--spacing-base) * 2);
+}
+
+/* --- Responsive adjustments for View Appointments --- */
+@media (max-width: 768px) {
+    .appointments-title {
+        font-size: 1.8em;
+    }
+    .appointments-subtitle {
+        font-size: 1em;
+    }
+    .appointments-section h2 {
+        font-size: 1.4em;
+    }
+
+    .appointment-card {
+        flex-direction: column; /* Stack content vertically */
+        align-items: flex-start; /* Align content left */
+        gap: calc(var(--spacing-base) * 2);
+    }
+
+    .appointment-status {
+        flex-direction: row; /* Place badge and buttons side-by-side */
+        align-items: center; /* Vertically align badge/buttons */
+        justify-content: space-between; /* Space them out */
+        width: 100%; /* Take full width */
+        margin-top: calc(var(--spacing-base) * 1);
+    }
+}
+
+/* --- Values Section --- */
+/* Find the existing .values-grid rule and add/modify it like this: */
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    gap: calc(var(--spacing-base) * 4);
+    margin-top: calc(var(--spacing-base) * 5); /* Space below subtitle */
+    justify-content: center; /* Add this line to center grid items horizontally */
+}
+
+/* --- Other styles for .our-values-section and .value-card remain the same --- */
