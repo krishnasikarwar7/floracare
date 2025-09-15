@@ -22,15 +22,10 @@ FloraCare is a modern, responsive frontend for a comprehensive health and wellne
 ## 💻 Technologies Used
 
 - **Frontend:** HTML5, CSS3, JavaScript
-- **Backend Integration:** The project is configured to connect with [Supabase](https://supabase.io/) for backend services, as indicated by the script tag `https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2`.
 
 ## 🚀 Getting Started
 
 To get a local copy up and running, follow these simple steps.
-
-### Prerequisites
-
-You need a modern web browser to view the files.
 
 ### Installation
 
@@ -73,6 +68,4 @@ This project was brought to life by a dedicated team of developers:
 -   **Riya Singh:** UI/UX Developer
 -   **Vedant Singh:** Backend Developer
 
----
 
-*This README was generated based on the project's source files.*
