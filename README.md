@@ -1,6 +1,10 @@
-# FloraCare - AI-Powered Health Companion
+# FloraCare - Health Companion
 
-FloraCare is a modern, responsive frontend for a comprehensive health and wellness platform designed to be an AI-powered health companion. It offers a suite of services including specialized modules for women's health (GyneCare) and baby care (BabyCare), along with a premium subscription service (FloraCare+). The platform is built with a focus on user experience, providing an intuitive interface for tracking health metrics, accessing educational resources, and managing personal health journeys.
+### 🟢 **[Live Demo Here](https://krishnasikarwar7.github.io/floracare/)** 🟢
+
+---
+
+FloraCare is a modern, responsive frontend for a comprehensive health and wellness platform designed to be an health companion. It offers a suite of services including specialized modules for women's health (GyneCare) and baby care (BabyCare), along with a premium subscription service (FloraCare+). The platform is built with a focus on user experience, providing an intuitive interface for tracking health metrics, accessing educational resources, and managing personal health journeys.
 
 ## ✨ Key Features
 
@@ -31,41 +35,12 @@ To get a local copy up and running, follow these simple steps.
 
 1.  Clone the repo:
     ```sh
-    git clone [https://github.com/your_username/floracare.git](https://github.com/your_username/floracare.git)
+    git clone [https://github.com/your-username/floracare.git](https://github.com/your-username/floracare.git)
     ```
-2.  Navigate to the project directory:
-    ```sh
-    cd floracare
-    ```
-3.  Open the `index.html` file in your web browser to start exploring the application.
-
-## 📂 File Structure
-
-The project is organized with a clear and straightforward structure:
-
-```
-/floracare
-|-- index.html              # Homepage
-|-- aboutus.html            # About Us page
-|-- gynecare.html           # GyneCare main page
-|-- periodtracker.html      # Period Tracker tool
-|-- stiassessment.html      # STI Assessment tool
-|-- babycare.html           # BabyCare main page
-|-- floracare+.html         # Premium features page
-|-- login.html              # Login page
-|-- signup.html             # Sign Up page
-|-- style.css               # Main stylesheet
-|-- script.js               # Global JavaScript
-|-- *.jpeg                  # Image assets
-|-- *.png                   # Image assets
-```
+2.  Open the `index.html` file in your web browser to start exploring the application.
 
 ## 👥 Meet the Team
-
-This project was brought to life by a dedicated team of developers:
 
 -   **Krishna Sikarwar:** Frontend Developer
 -   **Riya Singh:** UI/UX Developer
 -   **Vedant Singh:** Backend Developer
-
-
